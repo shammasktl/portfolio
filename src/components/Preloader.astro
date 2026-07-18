@@ -1,0 +1,76 @@
+---
+import "../styles/global.css";
+---
+
+<div
+  id="preloader"
+  class="fixed inset-0 z-50 bg-[#1a1410] flex items-center justify-center overflow-hidden"
+>
+  <div class="glitch-wrap">
+    <span
+      id="glitch-text"
+      data-text="Hello"
+      class="relative font-rye text-[clamp(2rem,4vw,4rem)] font-semibold text-[#ede0c8] tracking-wide"
+    >
+      Hello
+    </span>
+  </div>
+</div>
+
+<style>
+  #glitch-text {
+    position: relative;
+    display: inline-block;
+  }
+
+  #glitch-text::before,
+  #glitch-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0.8;
+    pointer-events: none;
+  }
+
+  /* Red glitch layer */
+  #glitch-text::before {
+    color: #ff2b2b;
+    transform: translate(-2px, 0);
+    clip-path: inset(0 0 55% 0);
+  }
+
+  /* Blue glitch layer */
+  #glitch-text::after {
+    color: #2bd8ff;
+    transform: translate(2px, 0);
+    clip-path: inset(55% 0 0 0);
+  }
+
+  /* Optional: subtle animation so it doesn’t look dead */
+  @keyframes glitch {
+    0% {
+      transform: translate(0);
+    }
+    20% {
+      transform: translate(-2px, 1px);
+    }
+    40% {
+      transform: translate(2px, -1px);
+    }
+    60% {
+      transform: translate(-1px, 0);
+    }
+    80% {
+      transform: translate(1px, 1px);
+    }
+    100% {
+      transform: translate(0);
+    }
+  }
+
+  #glitch-text {
+    animation: glitch 0.8s infinite;
+  }
+</style>
