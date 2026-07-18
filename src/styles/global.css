@@ -1,1 +1,65 @@
 @import "tailwindcss";
+
+@theme {
+  /* Fonts */
+  --font-rye: var(--font-rye);
+}
+
+/* Smooth scrollbar adjustments */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* Custom Scrollbar Styles */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1410; /* Dark brown preloader base */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3a2e24; /* Medium brown */
+  border-radius: 9999px;
+  border: 2px solid #1a1410;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ede0c8; /* Cream accent */
+}
+
+/* Sticky Header Scrolled State Transition */
+header {
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+header.header-scrolled {
+  background-color: rgba(26, 20, 16, 0.85); /* Semitransparent dark brown */
+  backdrop-filter: blur(12px);
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid rgba(237, 224, 200, 0.1);
+}
+
+/* Reading Progress Bar Glow Effect */
+.reading-progress-bar {
+  box-shadow: 0 0 8px rgba(237, 224, 200, 0.6);
+}
