@@ -2,11 +2,18 @@
 
 @theme {
   /* Fonts */
-  --font-rye: var(--font-rye);
+  --font-plus-jakarta-sans: var(--font-plus-jakarta-sans);
+
+  /* Colors */
+  --color-primary: #1a1c1e;
+  --color-secondary: #454749;
+  --color-tertiary: #721c24;
+  --color-neutral: #f8f9fa;
 }
 
 /* Smooth scrollbar adjustments */
-html.lenis, html.lenis body {
+html.lenis,
+html.lenis body {
   height: auto;
 }
 
