@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 # agentic instructions
 CLAUDE.md
+
+# temporary prompt files
+code.html
