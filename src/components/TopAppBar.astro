@@ -1,0 +1,71 @@
+---
+/**
+ * TopAppBar — Fixed navigation header for the executive portfolio.
+ * Shrinks on scroll via scroll.ts (adds `.header-scrolled` class).
+ * Drawer is toggled by NavDrawer.astro's inline script.
+ */
+
+interface Props {
+  name?: string;
+}
+
+const { name = "Mohammed Shammas" } = Astro.props;
+
+const pathname = Astro.url.pathname;
+
+const navLinks = [
+  { label: "Work",     href: "/#work"     },
+  { label: "About",    href: "/#about"    },
+  { label: "Services", href: "/#services" },
+  { label: "Contact",  href: "/#contact"  },
+];
+
+const isActive = (href: string) => pathname === href.split("#")[0];
+---
+
+<header
+  id="top-app-bar"
+  class="fixed top-0 w-full z-50 bg-surface border-b border-outline-variant transition-all duration-300 h-20"
+>
+  <div class="flex justify-between items-center h-full px-[var(--spacing-margin-mobile)] md:px-[var(--spacing-margin-desktop)] max-w-[var(--spacing-container-max)] mx-auto">
+
+    <!-- Left: Hamburger + Logo -->
+    <div class="flex items-center gap-4">
+      <button
+        id="drawer-toggle"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+        aria-controls="nav-drawer"
+        class="cursor-pointer active:opacity-70 text-primary"
+      >
+        <span class="material-symbols-outlined">menu_open</span>
+      </button>
+
+      <a href="/" class="font-plus-jakarta-sans font-bold tracking-tighter text-primary text-[20px] md:text-[24px] uppercase hover:opacity-80 transition-opacity">
+        {name}
+      </a>
+    </div>
+
+    <!-- Center/Right: Desktop Nav -->
+    <nav class="hidden md:flex items-center gap-8" aria-label="Primary navigation">
+      {navLinks.map((link) => (
+        <a
+          href={link.href}
+          class={[
+            "font-plus-jakarta-sans text-[12px] tracking-[0.1em] font-bold py-2 transition-colors duration-300",
+            isActive(link.href)
+              ? "text-primary border-b-2 border-primary"
+              : "text-secondary hover:text-primary",
+          ].join(" ")}
+        >
+          {link.label.toUpperCase()}
+        </a>
+      ))}
+    </nav>
+
+    <!-- Right: More menu icon (decorative / future) -->
+    <div class="flex items-center gap-2">
+      <span class="material-symbols-outlined text-primary select-none" aria-hidden="true">more_vert</span>
+    </div>
+  </div>
+</header>
