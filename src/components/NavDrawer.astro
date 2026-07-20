@@ -1,0 +1,113 @@
+---
+/**
+ * NavDrawer — Slide-in navigation drawer (from right).
+ * Uses a minimal inline script for toggle/close/overlay/keyboard ESC.
+ */
+
+const navLinks = [
+  { label: "Work",     href: "/#work",     icon: "work"    },
+  { label: "About",    href: "/#about",    icon: "person"  },
+  { label: "Services", href: "/#services", icon: "build"   },
+  { label: "Contact",  href: "/#contact",  icon: "mail"    },
+];
+---
+
+<!-- Overlay -->
+<div
+  id="drawer-overlay"
+  class="fixed inset-0 bg-black/20 backdrop-blur-sm z-[55] opacity-0 pointer-events-none transition-opacity duration-300"
+  aria-hidden="true"
+></div>
+
+<!-- Drawer -->
+<aside
+  id="nav-drawer"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Navigation menu"
+  class="h-full w-80 fixed right-0 top-0 z-[60] bg-surface-container-lowest shadow-lg translate-x-full transition-transform duration-300 ease-in-out"
+>
+  <div class="flex flex-col p-8 gap-8 h-full">
+
+    <!-- Drawer Header -->
+    <div class="flex justify-between items-center">
+      <span class="font-plus-jakarta-sans text-[12px] tracking-[0.1em] font-bold text-secondary uppercase">
+        Navigation
+      </span>
+      <button
+        id="drawer-close"
+        aria-label="Close navigation menu"
+        class="cursor-pointer text-primary hover:opacity-70 transition-opacity"
+      >
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
+
+    <!-- Nav Links -->
+    <nav class="flex flex-col gap-2" aria-label="Drawer navigation">
+      {navLinks.map((link, i) => (
+        <a
+          href={link.href}
+          class={[
+            "flex items-center gap-4 p-3 -mx-3 rounded-lg transition-all duration-200",
+            i === 0
+              ? "text-primary font-bold bg-surface-container-low"
+              : "text-secondary hover:bg-surface-container hover:text-primary",
+          ].join(" ")}
+        >
+          <span class="material-symbols-outlined text-[22px]">{link.icon}</span>
+          <span class="font-plus-jakarta-sans text-[24px] font-semibold leading-tight">{link.label}</span>
+        </a>
+      ))}
+    </nav>
+
+    <!-- Footer hint -->
+    <div class="mt-auto">
+      <p class="font-plus-jakarta-sans text-[12px] text-outline tracking-wide">
+        Mohammed Shammas · 2024
+      </p>
+    </div>
+  </div>
+</aside>
+
+<!-- Minimal drawer toggle script -->
+<script is:inline>
+  (function () {
+    const drawer  = document.getElementById("nav-drawer");
+    const overlay = document.getElementById("drawer-overlay");
+    const toggle  = document.getElementById("drawer-toggle");
+    const close   = document.getElementById("drawer-close");
+    if (!drawer || !overlay || !toggle || !close) return;
+
+    function openDrawer() {
+      drawer.classList.remove("translate-x-full");
+      overlay.classList.remove("opacity-0", "pointer-events-none");
+      document.body.classList.add("overflow-hidden");
+      toggle.setAttribute("aria-expanded", "true");
+      close.focus();
+    }
+
+    function closeDrawer() {
+      drawer.classList.add("translate-x-full");
+      overlay.classList.add("opacity-0", "pointer-events-none");
+      document.body.classList.remove("overflow-hidden");
+      toggle.setAttribute("aria-expanded", "false");
+      toggle.focus();
+    }
+
+    toggle.addEventListener("click", openDrawer);
+    close.addEventListener("click", closeDrawer);
+    overlay.addEventListener("click", closeDrawer);
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && !drawer.classList.contains("translate-x-full")) {
+        closeDrawer();
+      }
+    });
+
+    // Close drawer on nav link click (SPA-style)
+    drawer.querySelectorAll("a").forEach(function (a) {
+      a.addEventListener("click", closeDrawer);
+    });
+  })();
+</script>
