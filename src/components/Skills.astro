@@ -1,0 +1,89 @@
+---
+/**
+ * Skills — Specialized expertise cards section.
+ * Uses `.scroll-stagger` + `.scroll-stagger-item` for GSAP stagger animation
+ * (powered by existing scroll.ts).
+ */
+
+interface Skill {
+  icon:  string;
+  title: string;
+  body:  string;
+  tags:  string[];
+}
+
+const skills: Skill[] = [
+  {
+    icon:  "architecture",
+    title: "UX Design",
+    body:  "User-centric methodology focused on conversion architecture, behavioral flows, and scalable design systems for complex enterprise ecosystems.",
+    tags:  ["RESEARCH", "WIREFLOWS", "PROTOTYPING"],
+  },
+  {
+    icon:  "code",
+    title: "Frontend Development",
+    body:  "High-performance implementation using modern frameworks. Writing clean, maintainable code that prioritizes speed, accessibility, and responsiveness.",
+    tags:  ["TAILWIND", "TYPESCRIPT", "ASTRO"],
+  },
+  {
+    icon:  "tactic",
+    title: "Project Management",
+    body:  "Strategic leadership throughout the product lifecycle. Managing stakeholders, mitigating risks, and ensuring on-time delivery of premium digital assets.",
+    tags:  ["AGILE", "STRATEGY", "DELIVERY"],
+  },
+];
+---
+
+<section
+  id="about"
+  class="py-[var(--spacing-section-padding)] bg-surface-container-lowest"
+  aria-labelledby="skills-heading"
+>
+  <div class="container max-w-[var(--spacing-container-max)] mx-auto px-[var(--spacing-margin-mobile)] md:px-[var(--spacing-margin-desktop)]">
+
+    <!-- Section Header -->
+    <div class="text-center mb-16 scroll-reveal">
+      <span class="font-plus-jakarta-sans text-[12px] tracking-[0.1em] font-bold text-secondary uppercase">
+        Capabilities
+      </span>
+      <h2
+        id="skills-heading"
+        class="font-plus-jakarta-sans font-semibold text-primary mt-2 text-[48px] leading-[1.2] tracking-tight"
+      >
+        Specialized Expertise
+      </h2>
+    </div>
+
+    <!-- Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-[var(--spacing-gutter)] scroll-stagger">
+      {skills.map((skill) => (
+        <article class="scroll-stagger-item bg-surface border border-outline-variant p-8 transition-all duration-300 hover:shadow-[0px_4px_20px_rgba(0,0,0,0.06)] hover:-translate-y-1 rounded-sm">
+          <!-- Icon -->
+          <div class="w-12 h-12 bg-surface-container flex items-center justify-center rounded-sm mb-6 text-primary" aria-hidden="true">
+            <span class="material-symbols-outlined">{skill.icon}</span>
+          </div>
+
+          <!-- Title -->
+          <h3 class="font-plus-jakarta-sans font-semibold text-primary text-[24px] leading-tight mb-4">
+            {skill.title}
+          </h3>
+
+          <!-- Body -->
+          <p class="font-plus-jakarta-sans text-[16px] leading-relaxed text-secondary mb-6">
+            {skill.body}
+          </p>
+
+          <!-- Tags -->
+          <div class="flex flex-wrap gap-2" aria-label={`${skill.title} skills`}>
+            {skill.tags.map((tag) => (
+              <span class="bg-surface-container-high px-3 py-1 rounded-full font-plus-jakarta-sans text-[10px] tracking-[0.1em] font-bold text-on-surface-variant">
+                {tag}
+              </span>
+            ))}
+          </div>
+        </article>
+      ))}
+    </div>
+
+  </div>
+</section>
