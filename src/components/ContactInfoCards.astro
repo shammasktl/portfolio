@@ -1,0 +1,53 @@
+---
+/**
+ * ContactInfoCards — Bento grid display of essential contact details (Location, Hours, Privacy).
+ */
+
+export interface InfoCard {
+  icon:        string;
+  title:       string;
+  description: string;
+}
+
+export interface Props {
+  cards?: InfoCard[];
+}
+
+const defaultCards: InfoCard[] = [
+  {
+    icon:        "location_on",
+    title:       "Location",
+    description: "London, UK & Calicut, India — Global availability for travel and remote leadership.",
+  },
+  {
+    icon:        "schedule",
+    title:       "Office Hours",
+    description: "Mon — Fri, 09:00 — 18:00 GMT. Response times may vary slightly across time zones.",
+  },
+  {
+    icon:        "lock",
+    title:       "Privacy",
+    description: "All communications are treated with absolute professional discretion and strict confidentiality.",
+  },
+];
+
+const { cards = defaultCards } = Astro.props;
+---
+
+<section class="px-[var(--spacing-margin-mobile)] md:px-[var(--spacing-margin-desktop)] max-w-[var(--spacing-container-max)] mx-auto py-[var(--spacing-section-padding)]">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-[var(--spacing-gutter)] scroll-stagger">
+    {cards.map((card) => (
+      <article class="scroll-stagger-item bg-surface-container-lowest p-10 border border-outline-variant rounded-sm hover:border-primary transition-colors duration-300">
+        <span class="material-symbols-outlined text-primary mb-6 block text-[32px]" aria-hidden="true">
+          {card.icon}
+        </span>
+        <h3 class="font-plus-jakarta-sans font-semibold text-[24px] text-primary mb-4 leading-tight">
+          {card.title}
+        </h3>
+        <p class="font-plus-jakarta-sans text-[16px] text-secondary leading-relaxed">
+          {card.description}
+        </p>
+      </article>
+    ))}
+  </div>
+</section>
