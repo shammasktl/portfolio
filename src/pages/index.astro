@@ -1,7 +1,20 @@
 ---
-import LayoutAstroComponent from "../layouts/Layout.astro";
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
+import Skills from "../components/Skills.astro";
+import Projects from "../components/Projects.astro";
+import CTASection from "../components/CTASection.astro";
+import FooterBar from "../components/FooterBar.astro";
 ---
 
-<LayoutAstroComponent>
-  
-</LayoutAstroComponent>
+<Layout
+  title="Mohammed Shammas | The Developer Cum Solver"
+  description="Crafting digital experiences with precision and purpose. Mohammed Shammas bridges the gap between high-level strategy and pixel-perfect execution for global brands."
+  ogImage="/og-image.png"
+>
+  <Hero />
+  <Skills />
+  <Projects />
+  <CTASection />
+  <FooterBar />
+</Layout>
