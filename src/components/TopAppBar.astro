@@ -14,10 +14,10 @@ const { name = "Mohammed Shammas" } = Astro.props;
 const pathname = Astro.url.pathname;
 
 const navLinks = [
-  { label: "Work",     href: "/#work"     },
-  { label: "About",    href: "/#about"    },
-  { label: "Services", href: "/#services" },
-  { label: "Contact",  href: "/#contact"  },
+  { label: "Work",     href: "/work/"     },
+  { label: "About",    href: "/about/"    },
+  { label: "Services", href: "/services/" },
+  { label: "Contact",  href: "/contact/"  },
 ];
 
 const isActive = (href: string) => pathname === href.split("#")[0];
@@ -36,7 +36,7 @@ const isActive = (href: string) => pathname === href.split("#")[0];
         aria-label="Open navigation menu"
         aria-expanded="false"
         aria-controls="nav-drawer"
-        class="cursor-pointer active:opacity-70 text-primary"
+        class="cursor-pointer active:opacity-70 text-primary block md:hidden"
       >
         <span class="material-symbols-outlined">menu_open</span>
       </button>
@@ -62,10 +62,5 @@ const isActive = (href: string) => pathname === href.split("#")[0];
         </a>
       ))}
     </nav>
-
-    <!-- Right: More menu icon (decorative / future) -->
-    <div class="flex items-center gap-2">
-      <span class="material-symbols-outlined text-primary select-none" aria-hidden="true">more_vert</span>
-    </div>
   </div>
 </header>

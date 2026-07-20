@@ -1,0 +1,204 @@
+---
+/**
+ * WorkGallery — Curated gallery section with interactive filtering.
+ * Supports filtering by category: All Projects, UX Design, Development, Branding.
+ */
+
+interface Project {
+  id:           string;
+  title:        string;
+  subtitle:     string;
+  category:     'ux' | 'dev' | 'branding';
+  imageUrl:     string;
+  imageAlt:     string;
+  aspectRatio:  string;
+  isLarge?:     boolean;
+  href?:        string;
+}
+
+const projects: Project[] = [
+  {
+    id:          "vanguard-concierge",
+    title:       "Vanguard Concierge Platform",
+    subtitle:    "UX DESIGN & STRATEGY",
+    category:    "ux",
+    imageUrl:    "https://lh3.googleusercontent.com/aida-public/AB6AXuB1FwT4eKUE-CBBvOtHz_lQhLBrd4svcWuv3jNHFB_C0p8pSaDS4kjpYzuJjlw7sOAvFoOLbgRRNcAzH-LwUxaWc7JJnCsQMQJ9dQvv_T3wqNoXkb_peqlqxwYjZmGDGySv0eswqk5cnWhl4Bk1xGDNRzWe904TegOURRvyAqT2fQLvkyynTwNPwLBs-CCUSeBmtpI_de_LLfijFf47-0G09VJ7LoIsC4AN-ZRNzkg91ndu7bsB-VL9mk26r5QxYDJX9z9mHkdi0UY",
+    imageAlt:    "A high-end, minimalist mobile application interface for a luxury concierge service.",
+    aspectRatio: "aspect-[16/7]",
+    isLarge:     true,
+    href:        "#",
+  },
+  {
+    id:          "nexus-analytical-engine",
+    title:       "Nexus Analytical Engine",
+    subtitle:    "FULL-STACK DEVELOPMENT",
+    category:    "dev",
+    imageUrl:    "https://lh3.googleusercontent.com/aida-public/AB6AXuDfHAzzF3zV2QAeRmpbioouuCRII9JYALKIAy7ACkZwD8rVbdH89ioxMg2XnZNm_lDRaXKkyWHVhxwGLOnpYOmzp7r7D_hXilftX1k1LPSSa3OlmvhVxcIulH-2hTIn-1qKSMrU-918wR9MdeTsQe7UdzRia9c2NInn2H3ImSvsz2hHXKHYwvxxB_S8lfwaaFDWe8RWfRrf-_OIRYmyey5F7ChduN2t7mE7PyUIVQHUnSqacIOtOJXOEIWU1yMEPeKfND_5gHIuXsU",
+    imageAlt:    "Close up of a complex data visualization dashboard with dark mode UI elements.",
+    aspectRatio: "aspect-square",
+    href:        "#",
+  },
+  {
+    id:          "meridian-wealth-identity",
+    title:       "Meridian Wealth Identity",
+    subtitle:    "IDENTITY & BRANDING",
+    category:    "branding",
+    imageUrl:    "https://lh3.googleusercontent.com/aida-public/AB6AXuBbX5WrSAzJ02toIzizIrIcNiwaYEWbm0IRC7pRHeD4Qhj9yjlKCnhBosgw0kdAjzELnGdv0iV-o1Lb87uFI1ndVyefTNJ0gACa5MRJHAUopYAM5J_V9dvb1r9gXkmGOTyCUju_muvaPvGVTonUeL0yHxnnG_ZeYYrDalEksk9x2ACdlay9wqwwKymMpf5jbXomHEkXFW-WI9Thy4kEU8SNLI0IHrr5g1doQ9ZZPR82UsNvaMd9Bn-C2wOFVQyNV9QL72yOebwDJgo",
+    imageAlt:    "Minimalist brand identity design for a boutique consultancy firm.",
+    aspectRatio: "aspect-square",
+    href:        "#",
+  },
+  {
+    id:          "civic-pulse-dashboard",
+    title:       "Civic Pulse Dashboard",
+    subtitle:    "UX DESIGN",
+    category:    "ux",
+    imageUrl:    "https://lh3.googleusercontent.com/aida-public/AB6AXuDPYFzjYdnbNgFan-IipMIJamgh75JdZI2GvcZ0UkEe95Ejn4sVctDhaRoLmoVkHULh2ExBJgKwAVGV4qdbvuPNfCx4ALDvIbgK3tVWBNRvO_K2C3yJCqH2GAKEoG45amFe7Va7BOet6GaMyFnVhO7cycHYfjlBbNe9HTEg92QmuzryIdFJMWrdUw2O-SooLEbt1rY1KvZCR0OIb5HKZwHtfFPi44VLXSs-FZGZcdfS4Dg90X6RCyfVqBi8V-lcePGyJXpu83_BgHs",
+    imageAlt:    "A large-scale digital architecture visualization for a smart city project.",
+    aspectRatio: "aspect-[4/3]",
+    href:        "#",
+  },
+  {
+    id:          "core-horizon-api",
+    title:       "Core Horizon API",
+    subtitle:    "SYSTEM ARCHITECTURE",
+    category:    "dev",
+    imageUrl:    "https://lh3.googleusercontent.com/aida-public/AB6AXuDnU6PT_C7BltAiq3nWwWCFasqGIVolNg-kaUzqEjyz9JChevdRT-Wn7Pnxf745W2js_f7soxaTnLmFGGYp6v_KNXwXim0CRwfLk-qC2NW_NuQOFPMfGv0XxOsW0xY3x6zdpbtmWZpmMmWUvOE3bTBnGhot6jcPD3hTAZ13g7pr3XR33J7rlLcJ-K5IbRxrkfdQmn1eVhYqbT6Jehn6Tzli8SyWwC2MMzGXQByudrcrjJAFPufESNAEUrY-rrngFBVeknu2b-BRdkI",
+    imageAlt:    "Abstract representation of high-speed code execution using glowing vertical light trails.",
+    aspectRatio: "aspect-[4/3]",
+    href:        "#",
+  },
+];
+
+const categories = [
+  { key: 'all',      label: 'All Projects' },
+  { key: 'ux',       label: 'UX Design' },
+  { key: 'dev',      label: 'Development' },
+  { key: 'branding', label: 'Branding' },
+];
+---
+
+<div class="pt-8 pb-[var(--spacing-section-padding)]">
+  <!-- Header Section -->
+  <header class="max-w-[var(--spacing-container-max)] mx-auto px-[var(--spacing-margin-mobile)] md:px-[var(--spacing-margin-desktop)] mb-16 scroll-reveal">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-8">
+      <div class="max-w-2xl">
+        <span class="font-plus-jakarta-sans text-[12px] tracking-[0.1em] font-bold text-on-primary bg-primary py-1 px-3 mb-6 inline-block rounded-sm uppercase">
+          Curated Gallery
+        </span>
+        <h1 class="font-plus-jakarta-sans font-semibold text-primary text-[32px] md:text-[48px] leading-tight uppercase mb-4">
+          Selected Work
+        </h1>
+        <p class="font-plus-jakarta-sans text-[18px] text-secondary leading-relaxed">
+          A meticulous selection of strategic design interventions and high-performance development projects executed for global clients.
+        </p>
+      </div>
+
+      <!-- Category Filter Tabs -->
+      <nav aria-label="Project categories filter" class="flex items-center gap-6 overflow-x-auto pb-2 scrollbar-none">
+        {categories.map((cat, idx) => (
+          <button
+            data-filter={cat.key}
+            class={[
+              "filter-btn font-plus-jakarta-sans text-[12px] tracking-[0.1em] font-bold uppercase whitespace-nowrap py-2 transition-all duration-200 cursor-pointer border-b-2",
+              idx === 0
+                ? "active text-primary border-primary"
+                : "text-secondary border-transparent hover:text-primary",
+            ].join(" ")}
+          >
+            {cat.label}
+          </button>
+        ))}
+      </nav>
+    </div>
+  </header>
+
+  <!-- Project Grid -->
+  <section class="max-w-[var(--spacing-container-max)] mx-auto px-[var(--spacing-margin-mobile)] md:px-[var(--spacing-margin-desktop)]">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-[var(--spacing-gutter)] scroll-stagger" id="project-grid">
+      {projects.map((project) => (
+        <article
+          class={[
+            "project-card group cursor-pointer scroll-stagger-item transition-all duration-300",
+            project.isLarge ? "col-span-1 md:col-span-2" : "col-span-1",
+          ].join(" ")}
+          data-category={project.category}
+        >
+          <a href={project.href} class="block">
+            <!-- Image Wrapper -->
+            <div class={`relative ${project.aspectRatio} overflow-hidden bg-surface-container-high rounded-lg mb-6 border border-outline-variant`}>
+              <img
+                src={project.imageUrl}
+                alt={project.imageAlt}
+                loading="lazy"
+                decoding="async"
+                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div class="project-image-overlay absolute inset-0 bg-primary/10 opacity-0 transition-opacity duration-300"></div>
+            </div>
+
+            <!-- Card Info -->
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+              <div>
+                <span class="font-plus-jakarta-sans text-[12px] tracking-[0.1em] font-bold text-tertiary-container mb-2 block uppercase">
+                  {project.subtitle}
+                </span>
+                <h3 class="font-plus-jakarta-sans font-semibold text-[24px] md:text-[32px] text-primary group-hover:text-tertiary transition-colors leading-tight">
+                  {project.title}
+                </h3>
+              </div>
+              <span class="material-symbols-outlined text-primary text-3xl transition-transform group-hover:translate-x-2" aria-hidden="true">
+                arrow_right_alt
+              </span>
+            </div>
+          </a>
+        </article>
+      ))}
+    </div>
+  </section>
+</div>
+
+<script>
+  function initProjectFilters() {
+    const buttons = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+    const projects = document.querySelectorAll<HTMLElement>('.project-card');
+
+    if (!buttons.length || !projects.length) return;
+
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const category = btn.getAttribute('data-filter');
+
+        // Update active button state
+        buttons.forEach((b) => {
+          b.classList.remove('active', 'text-primary', 'border-primary');
+          b.classList.add('text-secondary', 'border-transparent');
+        });
+        btn.classList.add('active', 'text-primary', 'border-primary');
+        btn.classList.remove('text-secondary', 'border-transparent');
+
+        // Filter project items smoothly
+        projects.forEach((project) => {
+          const itemCategory = project.getAttribute('data-category');
+          if (category === 'all' || itemCategory === category) {
+            project.style.display = 'block';
+            requestAnimationFrame(() => {
+              project.style.opacity = '1';
+              project.style.transform = 'translateY(0)';
+            });
+          } else {
+            project.style.opacity = '0';
+            project.style.transform = 'translateY(10px)';
+            setTimeout(() => {
+              if (project.style.opacity === '0') {
+                project.style.display = 'none';
+              }
+            }, 300);
+          }
+        });
+      });
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', initProjectFilters);
+</script>
