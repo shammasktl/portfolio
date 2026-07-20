@@ -1,6 +1,6 @@
 ---
-import PreloaderAstroComponent from "../components/Preloader.astro";
 import "../styles/global.css";
+import HeaderAstroComponent from "../components/Header.astro";
 ---
 
 <!doctype html>
@@ -10,14 +10,19 @@ import "../styles/global.css";
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mohammed Shammas | The Developer Cum Solver</title>
   </head>
-  <body class="bg-[#1a1410] text-[#ede0c8] min-h-screen overflow-x-hidden selection:bg-[#ede0c8] selection:text-[#1a1410]">
+  <body
+    class="bg-neutral text-primary min-h-screen overflow-x-hidden selection:bg-tertiary selection:text-neutral"
+  >
+    <HeaderAstroComponent />
     <!-- Reading Progress Bar -->
-    <div class="reading-progress-bar fixed top-0 left-0 h-1 bg-[#ede0c8] z-50 transition-all duration-75" style="width: 0%;"></div>
+    <div
+      class="reading-progress-bar fixed top-0 left-0 h-1 bg-tertiary z-50 transition-all duration-75"
+      style="width: 0%;"
+    >
+    </div>
 
-    <PreloaderAstroComponent />
 
     <!-- Sticky Navigation Header -->
-    
 
     <main>
       <slot />
@@ -29,21 +34,46 @@ import "../styles/global.css";
       aria-label="Back to Top"
       class="fixed bottom-8 right-8 z-45 w-12 h-12 rounded-full bg-[#241c16] border border-[#ede0c8]/10 flex items-center justify-center text-[#ede0c8] hover:text-white hover:border-[#ede0c8] shadow-2xl cursor-pointer opacity-0 translate-y-4 pointer-events-none transition-all duration-300 hover:scale-105"
     >
-      <svg class="w-full h-full absolute inset-0 -rotate-90 p-0.5" viewBox="0 0 100 100">
-        <circle cx="50" cy="50" r="44" stroke="rgba(237, 224, 200, 0.05)" stroke-width="5" fill="transparent"></circle>
-        <circle class="back-to-top-progress-path" cx="50" cy="50" r="44" stroke="#ede0c8" stroke-width="5" fill="transparent" stroke-linecap="round"></circle>
+      <svg
+        class="w-full h-full absolute inset-0 -rotate-90 p-0.5"
+        viewBox="0 0 100 100"
+      >
+        <circle
+          cx="50"
+          cy="50"
+          r="44"
+          stroke="rgba(237, 224, 200, 0.05)"
+          stroke-width="5"
+          fill="transparent"></circle>
+        <circle
+          class="back-to-top-progress-path"
+          cx="50"
+          cy="50"
+          r="44"
+          stroke="#ede0c8"
+          stroke-width="5"
+          fill="transparent"
+          stroke-linecap="round"></circle>
       </svg>
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4 relative z-10 transition-transform duration-300 group-hover:-translate-y-0.5">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="2.5"
+        stroke="currentColor"
+        class="w-4 h-4 relative z-10 transition-transform duration-300 group-hover:-translate-y-0.5"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M4.5 15.75l7.5-7.5 7.5 7.5"></path>
       </svg>
     </button>
 
     <script>
-      import { initPreloader } from "../scripts/preloader";
       import { initScroll } from "../scripts/scroll";
-      
+
       document.addEventListener("DOMContentLoaded", () => {
-        initPreloader();
         initScroll();
       });
     </script>
