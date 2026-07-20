@@ -1,0 +1,71 @@
+---
+/**
+ * PersonalityGrid — Beyond the Boardroom section.
+ * Grid of pursuits/interests with Material Symbols icons.
+ */
+
+export interface Pursuit {
+  icon:        string;
+  title:       string;
+  description: string;
+}
+
+export interface Props {
+  badge?:    string;
+  heading?:  string;
+  pursuits?: Pursuit[];
+}
+
+const defaultPursuits: Pursuit[] = [
+  {
+    icon:        "menu_book",
+    title:       "The Written Word",
+    description: "An avid collector of architectural monographs and mid-century philosophy. I believe great design starts with a deep understanding of human thought history.",
+  },
+  {
+    icon:        "landscape",
+    title:       "Mountain Peaks",
+    description: "Hiking isn't just about the view; it's about the perspective. I spend my weekends navigating trails, finding clarity in the silence of the high altitudes.",
+  },
+  {
+    icon:        "token",
+    title:       "Mentorship",
+    description: "Investing in the next generation of creative leaders through weekly mentorship sessions and university guest lectures on ethics in technology.",
+  },
+];
+
+const {
+  badge    = "BEYOND THE BOARDROOM",
+  heading  = "Personality & Pursuit",
+  pursuits = defaultPursuits,
+} = Astro.props;
+---
+
+<section class="py-[var(--spacing-section-padding)] px-[var(--spacing-margin-mobile)] md:px-[var(--spacing-margin-desktop)] max-w-[var(--spacing-container-max)] mx-auto">
+  <!-- Section Header -->
+  <div class="text-center mb-20 scroll-reveal">
+    <span class="font-plus-jakarta-sans text-[12px] tracking-[0.1em] font-bold text-secondary uppercase block mb-2">
+      {badge}
+    </span>
+    <h2 class="font-plus-jakarta-sans font-semibold text-[32px] md:text-[48px] leading-tight text-primary">
+      {heading}
+    </h2>
+  </div>
+
+  <!-- 3-Column Grid -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-[var(--spacing-gutter)] scroll-stagger">
+    {pursuits.map((item) => (
+      <article class="scroll-stagger-item group border border-outline-variant p-10 hover:border-primary transition-colors duration-300 rounded-sm">
+        <span class="material-symbols-outlined text-[48px] text-primary mb-6 block" aria-hidden="true">
+          {item.icon}
+        </span>
+        <h3 class="font-plus-jakarta-sans font-semibold text-[24px] text-primary mb-4 leading-tight">
+          {item.title}
+        </h3>
+        <p class="font-plus-jakarta-sans text-[16px] leading-relaxed text-on-surface-variant">
+          {item.description}
+        </p>
+      </article>
+    ))}
+  </div>
+</section>

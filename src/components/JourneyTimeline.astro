@@ -1,0 +1,83 @@
+---
+/**
+ * JourneyTimeline — Career journey & background timeline component.
+ * Typed timeline entries with sticky header layout.
+ */
+
+export interface TimelineItem {
+  period:      string;
+  title:       string;
+  description: string;
+  isCurrent?:  boolean;
+}
+
+export interface Props {
+  heading?: string;
+  items?:   TimelineItem[];
+}
+
+const defaultItems: TimelineItem[] = [
+  {
+    period:      "2018 — PRESENT",
+    title:       "Strategic Creative Director",
+    description: "Leading multi-disciplinary teams to redefine digital presence for Fortune 500 companies. My focus is on creating scalable design systems that maintain brand integrity across global markets.",
+    isCurrent:   true,
+  },
+  {
+    period:      "2014 — 2018",
+    title:       "Senior UI Architect",
+    description: "Pioneered modular design components that increased development efficiency by 40%. Specialized in high-fidelity prototyping and user-centric flows for complex data visualization tools.",
+  },
+  {
+    period:      "EDUCATION",
+    title:       "Masters in Digital Media Design",
+    description: "The Royal Academy of Arts. Focused on the intersection of classical typography and modern interface psychology.",
+  },
+];
+
+const {
+  heading = "The Journey",
+  items   = defaultItems,
+} = Astro.props;
+---
+
+<section class="py-[var(--spacing-section-padding)] bg-surface-container-low">
+  <div class="px-[var(--spacing-margin-mobile)] md:px-[var(--spacing-margin-desktop)] max-w-[var(--spacing-container-max)] mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-[var(--spacing-gutter)]">
+
+      <!-- Sticky Section Header -->
+      <div class="md:col-span-4 scroll-reveal">
+        <h2 class="font-plus-jakarta-sans font-semibold text-primary text-[32px] md:text-[48px] leading-tight sticky top-32">
+          {heading}
+        </h2>
+      </div>
+
+      <!-- Timeline Content -->
+      <div class="md:col-span-8 space-y-16 scroll-stagger">
+        {items.map((item) => (
+          <div class="scroll-stagger-item border-l-2 border-outline-variant pl-8 relative">
+            <!-- Timeline Indicator Node -->
+            <div
+              class={[
+                "absolute w-4 h-4 left-[-9px] top-0",
+                item.isCurrent ? "bg-primary" : "bg-outline-variant",
+              ].join(" ")}
+              aria-hidden="true"
+            ></div>
+
+            <span class="font-plus-jakarta-sans text-[12px] tracking-[0.1em] font-bold text-secondary block mb-2 uppercase">
+              {item.period}
+            </span>
+            <h3 class="font-plus-jakarta-sans font-semibold text-[24px] md:text-[32px] text-primary mb-4 leading-tight">
+              {item.title}
+            </h3>
+            <p class="font-plus-jakarta-sans text-[16px] leading-relaxed text-on-surface-variant">
+              {item.description}
+            </p>
+          </div>
+        ))}
+      </div>
+
+    </div>
+  </div>
+</section>
