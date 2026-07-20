@@ -1,0 +1,78 @@
+---
+/**
+ * Hero — Landing hero section with portrait image, name, tagline, and CTAs.
+ * Reveal animations use `.scroll-reveal` / `.scroll-reveal-right` classes
+ * powered by the existing GSAP ScrollTrigger in scroll.ts.
+ */
+
+const heroImageUrl =
+  "https://lh3.googleusercontent.com/aida-public/AB6AXuCR5z3jho37U12VEDC29d7D_OHQ67jjVq1uhdHEnBtD80rwaWEAaWaeZqaLUpuWt8CBqp2D22ePWWl4CiTg5CZsVFrakZLZyjT8lJZUBu9oz20iTT_YB-vb2ZXiS6TzYr6oB_LV30qgiSQd-x2mUCFYdk7emMdEyDhza8pQfxUBIRCZDwaaRZRgrkWq0xH3NBB9JndmJrypvToppSsCJtLPvUP57xluxZAIzpbWe5oWK2ySQJ3kewHSF5MLo9d1kpwGlr3POrBOE5s";
+---
+
+<section
+  id="work"
+  class="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-surface py-16"
+  aria-labelledby="hero-heading"
+>
+  <div class="container max-w-[var(--spacing-container-max)] mx-auto px-[var(--spacing-margin-mobile)] md:px-[var(--spacing-margin-desktop)] grid grid-cols-1 md:grid-cols-12 gap-[var(--spacing-gutter)] items-center">
+
+    <!-- Text Column -->
+    <div class="md:col-span-6 z-10 scroll-reveal">
+      <span class="font-plus-jakarta-sans text-[12px] tracking-[0.1em] font-bold text-secondary mb-4 block uppercase">
+        Designed for Impact
+      </span>
+
+      <h1
+        id="hero-heading"
+        class="font-plus-jakarta-sans font-bold tracking-tight text-primary text-[40px] md:text-[72px] leading-[1.1] mb-6"
+      >
+        Mohammed<br />Shammas
+      </h1>
+
+      <p class="font-plus-jakarta-sans text-[18px] leading-relaxed text-on-surface-variant max-w-lg mb-4">
+        The Developer Cum Solver
+      </p>
+      <p class="font-plus-jakarta-sans text-[16px] leading-relaxed text-on-surface-variant max-w-lg mb-10">
+        Crafting digital experiences with precision and purpose. I bridge the gap
+        between high-level strategy and pixel-perfect execution for global brands.
+      </p>
+
+      <div class="flex flex-wrap gap-4">
+        <a
+          href="/#work"
+          class="bg-primary text-on-primary px-8 py-4 rounded font-bold transition-all hover:bg-primary-container active:scale-95 inline-block"
+        >
+          View Case Studies
+        </a>
+        <a
+          href="/#contact"
+          class="border border-primary text-primary px-8 py-4 rounded font-bold transition-all hover:bg-surface-container-high inline-block"
+        >
+          Let's Talk
+        </a>
+      </div>
+    </div>
+
+    <!-- Portrait Column -->
+    <div class="md:col-span-6 relative flex justify-center md:justify-end scroll-reveal-right">
+      <div class="relative w-full aspect-[4/5] max-w-[480px]">
+        <!-- Decorative rotated border -->
+        <div
+          class="absolute -inset-4 border border-outline-variant rounded-lg -z-10 transform rotate-2"
+          aria-hidden="true"
+        ></div>
+
+        <img
+          src={heroImageUrl}
+          alt="Mohammed Shammas — Developer and Problem Solver"
+          width="480"
+          height="600"
+          loading="eager"
+          decoding="async"
+          class="w-full h-full object-cover rounded-lg shadow-sm border border-outline-variant grayscale hover:grayscale-0 transition-all duration-700"
+        />
+      </div>
+    </div>
+
+  </div>
+</section>
