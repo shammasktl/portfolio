@@ -1,0 +1,51 @@
+---
+/**
+ * FooterBar — Site-wide footer with brand name, copyright, and social links.
+ */
+
+const socialLinks = [
+  { label: "LinkedIn", href: "https://linkedin.com/in/mohammedshammas" },
+  { label: "GitHub",   href: "https://github.com/shammasktl"            },
+  { label: "Twitter",  href: "https://twitter.com/"                     },
+  { label: "Email",    href: "mailto:hello@mohammedshammas.com"         },
+];
+
+const year = new Date().getFullYear();
+---
+
+<footer
+  class="w-full py-16 bg-surface border-t border-outline-variant"
+  aria-label="Site footer"
+>
+  <div class="flex flex-col md:flex-row justify-between items-start md:items-center px-[var(--spacing-margin-mobile)] md:px-[var(--spacing-margin-desktop)] max-w-[var(--spacing-container-max)] mx-auto gap-8">
+
+    <!-- Brand -->
+    <div class="space-y-3">
+      <p class="font-plus-jakarta-sans font-bold text-[24px] tracking-widest text-primary uppercase">
+        Mohammed Shammas
+      </p>
+      <p class="font-plus-jakarta-sans text-[14px] text-secondary">
+        © {year} Mohammed Shammas. All rights reserved.
+      </p>
+    </div>
+
+    <!-- Social Links -->
+    <nav aria-label="Social links">
+      <ul class="flex flex-wrap gap-8">
+        {socialLinks.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              target={link.href.startsWith("mailto") ? undefined : "_blank"}
+              rel={link.href.startsWith("mailto") ? undefined : "noopener noreferrer"}
+              class="font-plus-jakarta-sans text-[16px] text-secondary hover:text-primary underline underline-offset-4 transition-colors duration-200"
+            >
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+  </div>
+</footer>
