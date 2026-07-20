@@ -1,0 +1,48 @@
+---
+/**
+ * CTASection — Full-width dark call-to-action banner.
+ * Radial gradient overlay is pure CSS — no JS required.
+ */
+---
+
+<section
+  id="contact"
+  class="py-[var(--spacing-section-padding)] bg-primary text-on-primary overflow-hidden relative"
+  aria-labelledby="cta-heading"
+>
+  <!-- Pure-CSS radial gradient overlay -->
+  <div
+    class="absolute inset-0 pointer-events-none"
+    aria-hidden="true"
+    style="background-image: radial-gradient(circle at 10% 20%, rgba(255,255,255,0.06) 0%, transparent 45%), radial-gradient(circle at 90% 80%, rgba(255,255,255,0.06) 0%, transparent 45%);"
+  ></div>
+
+  <div class="container max-w-[var(--spacing-container-max)] mx-auto px-[var(--spacing-margin-mobile)] md:px-[var(--spacing-margin-desktop)] relative z-10 text-center">
+    <div class="scroll-reveal">
+
+      <span class="font-plus-jakarta-sans text-[12px] tracking-[0.1em] font-bold text-primary-fixed-dim uppercase block mb-6">
+        Let's Build Together
+      </span>
+
+      <h2
+        id="cta-heading"
+        class="font-plus-jakarta-sans font-bold tracking-tight text-on-primary text-[40px] md:text-[64px] leading-[1.1] mb-8"
+      >
+        Want to work together?
+      </h2>
+
+      <p class="font-plus-jakarta-sans text-[18px] leading-relaxed text-primary-fixed-dim mb-12 max-w-2xl mx-auto">
+        Currently accepting select high-impact projects for 2024. Let's discuss
+        how we can build something exceptional together.
+      </p>
+
+      <a
+        href="mailto:hello@mohammedshammas.com"
+        class="inline-block bg-surface text-primary px-12 py-5 rounded-sm font-bold text-lg transition-all duration-300 hover:shadow-[0px_8px_30px_rgba(255,255,255,0.15)] hover:-translate-y-1 active:scale-95"
+      >
+        Contact Me
+      </a>
+
+    </div>
+  </div>
+</section>
