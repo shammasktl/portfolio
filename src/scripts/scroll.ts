@@ -28,9 +28,10 @@ export function initScroll(): void {
   // Disable lag smoothing for better sync
   gsap.ticker.lagSmoothing(0);
 
-  // Manage preloader locking
+  // Manage preloader locking safely
+  const preloaderEl = document.getElementById("preloader");
   const isIntroPlayed = sessionStorage.getItem("introPlayed");
-  if (!isIntroPlayed) {
+  if (preloaderEl && !isIntroPlayed) {
     lenis.stop();
     window.addEventListener("preloaderFinished", () => {
       lenis.start();
