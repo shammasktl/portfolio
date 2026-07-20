@@ -1,0 +1,135 @@
+---
+/**
+ * ContactForm — Interactive contact form with floating underline focus state and client validation.
+ */
+
+export interface Props {
+  heading?:     string;
+  subheading?:  string;
+  buttonLabel?: string;
+}
+
+const {
+  heading     = "Send a Message",
+  subheading  = "Expect a response within 24 business hours. Confidentiality is guaranteed.",
+  buttonLabel = "Inquire Now",
+} = Astro.props;
+---
+
+<section class="bg-surface-container-lowest py-[var(--spacing-section-padding)] border-t border-b border-outline-variant">
+  <div class="px-[var(--spacing-margin-mobile)] md:px-[var(--spacing-margin-desktop)] max-w-[var(--spacing-container-max)] mx-auto">
+    <!-- Header -->
+    <div class="max-w-3xl mx-auto text-center scroll-reveal mb-16">
+      <h2 class="font-plus-jakarta-sans font-semibold text-[32px] md:text-[48px] text-primary mb-4 leading-tight">
+        {heading}
+      </h2>
+      <p class="font-plus-jakarta-sans text-[16px] text-secondary leading-relaxed">
+        {subheading}
+      </p>
+    </div>
+
+    <!-- Form -->
+    <form id="contact-form" class="max-w-2xl mx-auto space-y-10 scroll-reveal" style="transition-delay: 200ms;">
+      <!-- Name Field -->
+      <div class="relative group">
+        <label
+          for="contact-name"
+          class="font-plus-jakarta-sans text-[12px] tracking-[0.1em] font-bold text-secondary uppercase block mb-2 transition-colors group-focus-within:text-primary"
+        >
+          Your Name
+        </label>
+        <input
+          type="text"
+          id="contact-name"
+          name="name"
+          placeholder="e.g. John Morgan"
+          required
+          class="w-full bg-transparent border-0 border-b-2 border-outline-variant focus:border-primary focus:ring-0 p-0 py-3 text-[18px] font-plus-jakarta-sans text-primary placeholder:text-outline transition-colors outline-none"
+        />
+      </div>
+
+      <!-- Email Field -->
+      <div class="relative group">
+        <label
+          for="contact-email"
+          class="font-plus-jakarta-sans text-[12px] tracking-[0.1em] font-bold text-secondary uppercase block mb-2 transition-colors group-focus-within:text-primary"
+        >
+          Email Address
+        </label>
+        <input
+          type="email"
+          id="contact-email"
+          name="email"
+          placeholder="e.g. john@corporate.com"
+          required
+          class="w-full bg-transparent border-0 border-b-2 border-outline-variant focus:border-primary focus:ring-0 p-0 py-3 text-[18px] font-plus-jakarta-sans text-primary placeholder:text-outline transition-colors outline-none"
+        />
+      </div>
+
+      <!-- Message Field -->
+      <div class="relative group">
+        <label
+          for="contact-message"
+          class="font-plus-jakarta-sans text-[12px] tracking-[0.1em] font-bold text-secondary uppercase block mb-2 transition-colors group-focus-within:text-primary"
+        >
+          Message
+        </label>
+        <textarea
+          id="contact-message"
+          name="message"
+          rows="4"
+          placeholder="Briefly describe your inquiry or project requirements..."
+          required
+          class="w-full bg-transparent border-0 border-b-2 border-outline-variant focus:border-primary focus:ring-0 p-0 py-3 text-[18px] font-plus-jakarta-sans text-primary placeholder:text-outline transition-colors outline-none resize-none"
+        ></textarea>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="pt-6 flex flex-col items-center gap-4">
+        <button
+          type="submit"
+          id="submit-btn"
+          class="px-12 py-5 bg-primary text-on-primary font-plus-jakarta-sans text-[12px] tracking-[0.1em] font-bold rounded-sm uppercase hover:bg-on-surface-variant transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer shadow-sm"
+        >
+          {buttonLabel}
+        </button>
+
+        <p id="form-status" class="font-plus-jakarta-sans text-[14px] font-medium text-secondary hidden transition-all">
+          Thank you. Your message has been sent successfully.
+        </p>
+      </div>
+    </form>
+  </div>
+</section>
+
+<script>
+  function initContactForm() {
+    const form = document.getElementById('contact-form') as HTMLFormElement | null;
+    const status = document.getElementById('form-status');
+    const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement | null;
+
+    if (!form || !status || !submitBtn) return;
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      // Simple UX submission feedback
+      const originalText = submitBtn.textContent;
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending...';
+
+      setTimeout(() => {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+        status.classList.remove('hidden');
+        form.reset();
+
+        setTimeout(() => {
+          status.classList.add('hidden');
+        }, 5000);
+      }, 800);
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', initContactForm);
+</script>
