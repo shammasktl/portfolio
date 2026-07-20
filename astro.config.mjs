@@ -8,6 +8,8 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
+  base: "/",
+  trailingSlash: "always",
   fonts: [
     {
       provider: fontProviders.google(),
