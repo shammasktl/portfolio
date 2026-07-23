@@ -1,109 +1,148 @@
 ---
 /**
- * WorkGallery — Curated gallery section with interactive filtering.
- * Supports filtering by category: All Projects, UX Design, Development, Branding.
+ * WorkGallery — Modern Editorial Bento Grid Gallery & Project Template Section.
+ * 
+ * =========================================================================
+ * TEMPLATE GUIDANCE FOR ADDING NEW PROJECTS / BENTO CARDS:
+ * 
+ * To add a new project:
+ * 1. Add a new object to the `bentoProjects` array below.
+ * 2. Fill in the fields: `id`, `title`, `subtitle`, `category`, `tags`, `imageUrl`, `description`, etc.
+ * 3. Choose a `colSpan` layout for desktop/tablet (e.g., 'col-span-1 md:col-span-2 lg:col-span-8' for large hero cards,
+ *    or 'col-span-1 md:col-span-1 lg:col-span-4' for standard bento tiles).
+ * =========================================================================
  */
 
-interface Project {
+export interface BentoProject {
   id:           string;
   title:        string;
   subtitle:     string;
   category:     'ux' | 'dev' | 'branding';
+  tags:         string[];
   imageUrl:     string;
   imageAlt:     string;
-  aspectRatio:  string;
-  isLarge?:     boolean;
-  href?:        string;
+  description:  string;
+  metrics?:     { label: string; value: string };
+  href:         string;
+  colSpan:      string; // Tailwind column span classes for responsive bento grid
+  isFeatured?:  boolean;
+  date?:        string;
 }
 
-const projects: Project[] = [
+const bentoProjects: BentoProject[] = [
+  /* TEMPLATE ITEM 1: Featured Main Hero Card (Large Span) */
   {
     id:          "vanguard-concierge",
     title:       "Vanguard Concierge Platform",
-    subtitle:    "UX DESIGN & STRATEGY",
+    subtitle:    "LUXURY UX & DIGITAL ARCHITECTURE",
     category:    "ux",
+    tags:        ["UX Strategy", "System Architecture", "React", "Design System"],
     imageUrl:    "https://lh3.googleusercontent.com/aida-public/AB6AXuB1FwT4eKUE-CBBvOtHz_lQhLBrd4svcWuv3jNHFB_C0p8pSaDS4kjpYzuJjlw7sOAvFoOLbgRRNcAzH-LwUxaWc7JJnCsQMQJ9dQvv_T3wqNoXkb_peqlqxwYjZmGDGySv0eswqk5cnWhl4Bk1xGDNRzWe904TegOURRvyAqT2fQLvkyynTwNPwLBs-CCUSeBmtpI_de_LLfijFf47-0G09VJ7LoIsC4AN-ZRNzkg91ndu7bsB-VL9mk26r5QxYDJX9z9mHkdi0UY",
-    imageAlt:    "A high-end, minimalist mobile application interface for a luxury concierge service.",
-    aspectRatio: "aspect-[16/7]",
-    isLarge:     true,
+    imageAlt:    "Minimalist luxury concierge mobile and web application interface",
+    description: "Architected an end-to-end luxury concierge digital platform servicing high-net-worth clients across Europe with real-time request tracking and bespoke UI dynamics.",
+    metrics:     { label: "Client Satisfaction", value: "99.4%" },
     href:        "#",
+    colSpan:     "col-span-1 md:col-span-2 lg:col-span-8",
+    isFeatured:  true,
+    date:        "2025 - Present",
   },
+  /* TEMPLATE ITEM 2: Medium Technical Card */
   {
     id:          "nexus-analytical-engine",
     title:       "Nexus Analytical Engine",
-    subtitle:    "FULL-STACK DEVELOPMENT",
+    subtitle:    "FULL-STACK DATA INFRASTRUCTURE",
     category:    "dev",
+    tags:        ["TypeScript", "Astro", "Tailwind", "REST APIs"],
     imageUrl:    "https://lh3.googleusercontent.com/aida-public/AB6AXuDfHAzzF3zV2QAeRmpbioouuCRII9JYALKIAy7ACkZwD8rVbdH89ioxMg2XnZNm_lDRaXKkyWHVhxwGLOnpYOmzp7r7D_hXilftX1k1LPSSa3OlmvhVxcIulH-2hTIn-1qKSMrU-918wR9MdeTsQe7UdzRia9c2NInn2H3ImSvsz2hHXKHYwvxxB_S8lfwaaFDWe8RWfRrf-_OIRYmyey5F7ChduN2t7mE7PyUIVQHUnSqacIOtOJXOEIWU1yMEPeKfND_5gHIuXsU",
-    imageAlt:    "Close up of a complex data visualization dashboard with dark mode UI elements.",
-    aspectRatio: "aspect-square",
+    imageAlt:    "Complex data analytics dashboard visual interface in dark mode",
+    description: "High-performance enterprise data visualization engine built for low latency and smooth high-frequency chart rendering.",
+    metrics:     { label: "Latency Reduction", value: "65%" },
     href:        "#",
+    colSpan:     "col-span-1 md:col-span-1 lg:col-span-4",
+    date:        "2024",
   },
+  /* TEMPLATE ITEM 3: Branding Identity Card */
   {
     id:          "meridian-wealth-identity",
     title:       "Meridian Wealth Identity",
-    subtitle:    "IDENTITY & BRANDING",
+    subtitle:    "BRAND SYSTEM & DIRECTORY",
     category:    "branding",
+    tags:        ["Brand Strategy", "Typography", "Visual Identity"],
     imageUrl:    "https://lh3.googleusercontent.com/aida-public/AB6AXuBbX5WrSAzJ02toIzizIrIcNiwaYEWbm0IRC7pRHeD4Qhj9yjlKCnhBosgw0kdAjzELnGdv0iV-o1Lb87uFI1ndVyefTNJ0gACa5MRJHAUopYAM5J_V9dvb1r9gXkmGOTyCUju_muvaPvGVTonUeL0yHxnnG_ZeYYrDalEksk9x2ACdlay9wqwwKymMpf5jbXomHEkXFW-WI9Thy4kEU8SNLI0IHrr5g1doQ9ZZPR82UsNvaMd9Bn-C2wOFVQyNV9QL72yOebwDJgo",
-    imageAlt:    "Minimalist brand identity design for a boutique consultancy firm.",
-    aspectRatio: "aspect-square",
+    imageAlt:    "Boutique wealth management brand identity system",
+    description: "Complete visual redesign and editorial brand guidelines created for a global wealth management firm.",
+    metrics:     { label: "Brand Equity Index", value: "+42%" },
     href:        "#",
+    colSpan:     "col-span-1 md:col-span-1 lg:col-span-4",
+    date:        "2024",
   },
+  /* TEMPLATE ITEM 4: Wide Horizontal Split Card */
   {
     id:          "civic-pulse-dashboard",
-    title:       "Civic Pulse Dashboard",
-    subtitle:    "UX DESIGN",
+    title:       "Civic Pulse Smart City Dashboard",
+    subtitle:    "UX & URBAN DATA INTERACTION",
     category:    "ux",
+    tags:        ["Smart City", "Accessibility", "UI Systems"],
     imageUrl:    "https://lh3.googleusercontent.com/aida-public/AB6AXuDPYFzjYdnbNgFan-IipMIJamgh75JdZI2GvcZ0UkEe95Ejn4sVctDhaRoLmoVkHULh2ExBJgKwAVGV4qdbvuPNfCx4ALDvIbgK3tVWBNRvO_K2C3yJCqH2GAKEoG45amFe7Va7BOet6GaMyFnVhO7cycHYfjlBbNe9HTEg92QmuzryIdFJMWrdUw2O-SooLEbt1rY1KvZCR0OIb5HKZwHtfFPi44VLXSs-FZGZcdfS4Dg90X6RCyfVqBi8V-lcePGyJXpu83_BgHs",
-    imageAlt:    "A large-scale digital architecture visualization for a smart city project.",
-    aspectRatio: "aspect-[4/3]",
+    imageAlt:    "Smart city digital architecture and sensor visualization panel",
+    description: "Public municipality portal streamlining urban transport telemetry, energy usage, and real-time civic announcements.",
+    metrics:     { label: "Active Citizens", value: "250K+" },
     href:        "#",
+    colSpan:     "col-span-1 md:col-span-2 lg:col-span-8",
+    date:        "2023",
   },
+  /* TEMPLATE ITEM 5: Micro Tech Card */
   {
     id:          "core-horizon-api",
-    title:       "Core Horizon API",
-    subtitle:    "SYSTEM ARCHITECTURE",
+    title:       "Core Horizon API Framework",
+    subtitle:    "MICROSERVICES ARCHITECTURE",
     category:    "dev",
+    tags:        ["Node.js", "GraphQL", "Performance"],
     imageUrl:    "https://lh3.googleusercontent.com/aida-public/AB6AXuDnU6PT_C7BltAiq3nWwWCFasqGIVolNg-kaUzqEjyz9JChevdRT-Wn7Pnxf745W2js_f7soxaTnLmFGGYp6v_KNXwXim0CRwfLk-qC2NW_NuQOFPMfGv0XxOsW0xY3x6zdpbtmWZpmMmWUvOE3bTBnGhot6jcPD3hTAZ13g7pr3XR33J7rlLcJ-K5IbRxrkfdQmn1eVhYqbT6Jehn6Tzli8SyWwC2MMzGXQByudrcrjJAFPufESNAEUrY-rrngFBVeknu2b-BRdkI",
-    imageAlt:    "Abstract representation of high-speed code execution using glowing vertical light trails.",
-    aspectRatio: "aspect-[4/3]",
+    imageAlt:    "Abstract light trails illustrating cloud backend architecture",
+    description: "Fault-tolerant microservices platform processing over 10 million transactions daily.",
+    metrics:     { label: "Uptime Guaranteed", value: "99.99%" },
     href:        "#",
+    colSpan:     "col-span-1 md:col-span-1 lg:col-span-4",
+    date:        "2023",
   },
 ];
 
 const categories = [
-  { key: 'all',      label: 'All Projects' },
-  { key: 'ux',       label: 'UX Design' },
-  { key: 'dev',      label: 'Development' },
+  { key: 'all',      label: 'All Works' },
+  { key: 'ux',       label: 'UX & Product' },
+  { key: 'dev',      label: 'Engineering' },
   { key: 'branding', label: 'Branding' },
 ];
 ---
 
-<div class="pt-8 pb-[var(--spacing-section-padding)]">
+<div class="pt-6 md:pt-10 pb-[var(--spacing-section-padding)]">
   <!-- Header Section -->
-  <header class="max-w-[var(--spacing-container-max)] mx-auto px-[var(--spacing-margin-mobile)] md:px-[var(--spacing-margin-desktop)] mb-16 scroll-reveal">
-    <div class="flex flex-col md:flex-row md:items-end justify-between gap-8">
+  <header class="max-w-[var(--spacing-container-max)] mx-auto px-[var(--spacing-margin-mobile)] md:px-[var(--spacing-margin-desktop)] mb-12 md:mb-16 scroll-reveal">
+    <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-8 pb-8 border-b border-outline-variant">
       <div class="max-w-2xl">
-        <span class="font-plus-jakarta-sans text-[12px] tracking-[0.1em] font-bold text-on-primary bg-primary py-1 px-3 mb-6 inline-block rounded-sm uppercase">
-          Curated Gallery
-        </span>
-        <h1 class="font-plus-jakarta-sans font-semibold text-primary text-[32px] md:text-[48px] leading-tight uppercase mb-4">
-          Selected Work
+        <div class="inline-flex items-center gap-2 font-plus-jakarta-sans text-[11px] tracking-[0.15em] font-bold text-on-primary bg-primary py-1 px-3 mb-4 rounded-sm uppercase">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+          Bento Work Collection
+        </div>
+        <h1 class="font-plus-jakarta-sans font-extrabold text-primary text-[32px] sm:text-[42px] md:text-[54px] leading-[1.1] uppercase tracking-tight mb-4">
+          Selected Interventions
         </h1>
-        <p class="font-plus-jakarta-sans text-[18px] text-secondary leading-relaxed">
-          A meticulous selection of strategic design interventions and high-performance development projects executed for global clients.
+        <p class="font-plus-jakarta-sans text-[15px] sm:text-[17px] md:text-[18px] text-secondary leading-relaxed">
+          A strategic grid of high-impact digital products, brand identities, and full-stack technical solutions designed for global scale.
         </p>
       </div>
 
-      <!-- Category Filter Tabs -->
-      <nav aria-label="Project categories filter" class="flex items-center gap-6 overflow-x-auto pb-2 scrollbar-none">
+      <!-- Filter Buttons -->
+      <nav aria-label="Project category filters" class="flex items-center gap-2 sm:gap-3 overflow-x-auto pb-2 scrollbar-none w-full lg:w-auto">
         {categories.map((cat, idx) => (
           <button
             data-filter={cat.key}
             class={[
-              "filter-btn font-plus-jakarta-sans text-[12px] tracking-[0.1em] font-bold uppercase whitespace-nowrap py-2 transition-all duration-200 cursor-pointer border-b-2",
+              "filter-btn font-plus-jakarta-sans text-[12px] tracking-[0.08em] font-bold uppercase whitespace-nowrap px-4 py-2.5 rounded-full transition-all duration-300 cursor-pointer border",
               idx === 0
-                ? "active text-primary border-primary"
-                : "text-secondary border-transparent hover:text-primary",
+                ? "active bg-primary text-on-primary border-primary shadow-sm"
+                : "bg-surface-container-low text-secondary border-outline-variant hover:border-primary hover:text-primary",
             ].join(" ")}
           >
             {cat.label}
@@ -113,20 +152,45 @@ const categories = [
     </div>
   </header>
 
-  <!-- Project Grid -->
+  <!-- Bento Grid Container -->
   <section class="max-w-[var(--spacing-container-max)] mx-auto px-[var(--spacing-margin-mobile)] md:px-[var(--spacing-margin-desktop)]">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-[var(--spacing-gutter)] scroll-stagger" id="project-grid">
-      {projects.map((project) => (
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 sm:gap-8 scroll-stagger" id="bento-grid">
+      
+      {bentoProjects.map((project) => (
         <article
           class={[
-            "project-card group cursor-pointer scroll-stagger-item transition-all duration-300",
-            project.isLarge ? "col-span-1 md:col-span-2" : "col-span-1",
+            "bento-item group relative rounded-xl bg-surface-container-lowest border border-outline-variant overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col justify-between scroll-stagger-item",
+            project.colSpan,
           ].join(" ")}
           data-category={project.category}
         >
-          <a href={project.href} class="block">
-            <!-- Image Wrapper -->
-            <div class={`relative ${project.aspectRatio} overflow-hidden bg-surface-container-high rounded-lg mb-6 border border-outline-variant`}>
+          <a href={project.href} class="block h-full flex flex-col justify-between p-6 sm:p-8">
+            <!-- Top Metadata -->
+            <div>
+              <div class="flex items-center justify-between gap-4 mb-4">
+                <span class="font-plus-jakarta-sans text-[11px] font-bold tracking-widest text-secondary uppercase bg-surface-container-high px-2.5 py-1 rounded">
+                  {project.subtitle}
+                </span>
+                {project.date && (
+                  <span class="font-plus-jakarta-sans text-[12px] font-medium text-outline">
+                    {project.date}
+                  </span>
+                )}
+              </div>
+
+              <!-- Title -->
+              <h3 class="font-plus-jakarta-sans font-bold text-[22px] sm:text-[28px] lg:text-[32px] text-primary group-hover:text-tertiary transition-colors leading-tight mb-3">
+                {project.title}
+              </h3>
+
+              <!-- Description -->
+              <p class="font-plus-jakarta-sans text-[14px] sm:text-[15px] text-on-surface-variant leading-relaxed mb-6 line-clamp-3">
+                {project.description}
+              </p>
+            </div>
+
+            <!-- Visual Image Display -->
+            <div class={`relative ${project.isFeatured ? 'h-64 sm:h-80 md:h-96' : 'h-48 sm:h-56 md:h-64'} overflow-hidden rounded-lg bg-surface-container-high border border-outline-variant mb-6 group`}>
               <img
                 src={project.imageUrl}
                 alt={project.imageAlt}
@@ -134,36 +198,73 @@ const categories = [
                 decoding="async"
                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
-              <div class="project-image-overlay absolute inset-0 bg-primary/10 opacity-0 transition-opacity duration-300"></div>
+              <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity"></div>
+              
+              <!-- Metric Badge overlay if present -->
+              {project.metrics && (
+                <div class="absolute bottom-4 left-4 bg-background/90 backdrop-blur-md px-3.5 py-2 rounded-lg border border-outline-variant/60 shadow-md">
+                  <div class="text-[10px] uppercase tracking-wider text-secondary font-bold">{project.metrics.label}</div>
+                  <div class="text-[16px] font-extrabold text-primary">{project.metrics.value}</div>
+                </div>
+              )}
             </div>
 
-            <!-- Card Info -->
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-              <div>
-                <span class="font-plus-jakarta-sans text-[12px] tracking-[0.1em] font-bold text-tertiary-container mb-2 block uppercase">
-                  {project.subtitle}
-                </span>
-                <h3 class="font-plus-jakarta-sans font-semibold text-[24px] md:text-[32px] text-primary group-hover:text-tertiary transition-colors leading-tight">
-                  {project.title}
-                </h3>
+            <!-- Bottom Tags & Arrow -->
+            <div class="pt-4 border-t border-outline-variant/60 flex items-center justify-between gap-4 mt-auto">
+              <div class="flex flex-wrap items-center gap-1.5 sm:gap-2">
+                {project.tags.map((tag) => (
+                  <span class="font-plus-jakarta-sans text-[11px] font-medium bg-surface-container text-on-surface-variant px-2.5 py-1 rounded-full">
+                    {tag}
+                  </span>
+                ))}
               </div>
-              <span class="material-symbols-outlined text-primary text-3xl transition-transform group-hover:translate-x-2" aria-hidden="true">
-                arrow_right_alt
-              </span>
+              
+              <div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center shrink-0 group-hover:bg-tertiary transition-colors shadow-sm">
+                <span class="material-symbols-outlined text-[20px] group-hover:translate-x-0.5 transition-transform" aria-hidden="true">
+                  arrow_forward
+                </span>
+              </div>
             </div>
           </a>
         </article>
       ))}
+
+      <!-- Interactive Bento Stat Tile (Adds design richness to the grid) -->
+      <article class="col-span-1 md:col-span-1 lg:col-span-4 rounded-xl bg-primary text-on-primary p-6 sm:p-8 flex flex-col justify-between border border-outline-variant shadow-md">
+        <div>
+          <span class="font-plus-jakarta-sans text-[11px] font-bold tracking-widest text-on-primary-container uppercase bg-primary-container px-2.5 py-1 rounded inline-block mb-4">
+            IMPACT METRICS
+          </span>
+          <h3 class="font-plus-jakarta-sans font-bold text-[24px] sm:text-[28px] text-on-primary mb-2">
+            Engineering Precision
+          </h3>
+          <p class="font-plus-jakarta-sans text-[14px] text-on-primary-container leading-relaxed">
+            Consistently delivering sub-second response times, bulletproof test coverage, and human-centered design elegance.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4 pt-6 mt-6 border-t border-outline-variant/20">
+          <div>
+            <div class="text-[28px] font-black text-on-primary">100%</div>
+            <div class="text-[11px] text-on-primary-container uppercase font-bold tracking-wider">Client On-Time Rate</div>
+          </div>
+          <div>
+            <div class="text-[28px] font-black text-on-primary">14+</div>
+            <div class="text-[11px] text-on-primary-container uppercase font-bold tracking-wider">Global Shipments</div>
+          </div>
+        </div>
+      </article>
+
     </div>
   </section>
 </div>
 
 <script>
-  function initProjectFilters() {
+  function initBentoFilters() {
     const buttons = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
-    const projects = document.querySelectorAll<HTMLElement>('.project-card');
+    const bentoItems = document.querySelectorAll<HTMLElement>('.bento-item');
 
-    if (!buttons.length || !projects.length) return;
+    if (!buttons.length || !bentoItems.length) return;
 
     buttons.forEach((btn) => {
       btn.addEventListener('click', () => {
@@ -171,34 +272,34 @@ const categories = [
 
         // Update active button state
         buttons.forEach((b) => {
-          b.classList.remove('active', 'text-primary', 'border-primary');
-          b.classList.add('text-secondary', 'border-transparent');
+          b.classList.remove('active', 'bg-primary', 'text-on-primary', 'border-primary', 'shadow-sm');
+          b.classList.add('bg-surface-container-low', 'text-secondary', 'border-outline-variant');
         });
-        btn.classList.add('active', 'text-primary', 'border-primary');
-        btn.classList.remove('text-secondary', 'border-transparent');
+        btn.classList.add('active', 'bg-primary', 'text-on-primary', 'border-primary', 'shadow-sm');
+        btn.classList.remove('bg-surface-container-low', 'text-secondary', 'border-outline-variant');
 
-        // Filter project items smoothly
-        projects.forEach((project) => {
-          const itemCategory = project.getAttribute('data-category');
+        // Smooth filter transition
+        bentoItems.forEach((item) => {
+          const itemCategory = item.getAttribute('data-category');
           if (category === 'all' || itemCategory === category) {
-            project.style.display = 'block';
+            item.style.display = 'flex';
             requestAnimationFrame(() => {
-              project.style.opacity = '1';
-              project.style.transform = 'translateY(0)';
+              item.style.opacity = '1';
+              item.style.transform = 'scale(1)';
             });
           } else {
-            project.style.opacity = '0';
-            project.style.transform = 'translateY(10px)';
+            item.style.opacity = '0';
+            item.style.transform = 'scale(0.96)';
             setTimeout(() => {
-              if (project.style.opacity === '0') {
-                project.style.display = 'none';
+              if (item.style.opacity === '0') {
+                item.style.display = 'none';
               }
-            }, 300);
+            }, 250);
           }
         });
       });
     });
   }
 
-  document.addEventListener('DOMContentLoaded', initProjectFilters);
+  document.addEventListener('DOMContentLoaded', initBentoFilters);
 </script>

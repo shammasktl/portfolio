@@ -1,24 +1,36 @@
 ---
 /**
- * Projects — Selected work / case studies section.
- * Alternating image-left / image-right layout.
- * Uses scroll-reveal-left / scroll-reveal-right for GSAP directional reveals.
+ * Projects — Selected Case Studies Section Template.
+ * 
+ * =========================================================================
+ * TEMPLATE GUIDANCE FOR ADDING NEW CASE STUDIES:
+ * 
+ * To add or edit case studies:
+ * 1. Modify the `projects` array below.
+ * 2. Each object represents one case study.
+ * 3. Set `imageLeft: true` for odd items and `imageLeft: false` for even items
+ *    to preserve the alternating visual flow on desktop.
+ * =========================================================================
  */
 
-interface Project {
-  category:    string;
-  categoryBg:  string;
+export interface ProjectTemplateItem {
+  id:           string;
+  category:     string;
+  categoryBg:   string;
   categoryText: string;
-  title:       string;
-  description: string;
-  imageUrl:    string;
-  imageAlt:    string;
-  imageLeft:   boolean; // true = image on left, false = image on right
+  title:        string;
+  description:  string;
+  imageUrl:     string;
+  imageAlt:     string;
+  imageLeft:    boolean; // true = image on left, false = image on right
+  href?:        string;
 }
 
-const projects: Project[] = [
+const projects: ProjectTemplateItem[] = [
+  /* TEMPLATE CASE STUDY 1 */
   {
-    category:     "Fintech",
+    id:           "global-asset-management",
+    category:     "Fintech & Strategy",
     categoryBg:   "bg-tertiary-fixed",
     categoryText: "text-on-tertiary-fixed",
     title:        "Global Asset Management Portal",
@@ -26,9 +38,12 @@ const projects: Project[] = [
     imageUrl:     "https://lh3.googleusercontent.com/aida-public/AB6AXuDJ1SA4-73E6GdgQQ4HPov5isXl7PvxN4zniQXQqaPJhtD-tCPTq3flpW2U1Dv4xT5buBNKCJWwRYtLDrrFLHD2z_CVy-ILgcUbnA90wq4bZjwE4bNrnsCfcMUX2TFTjimfCZ3gzqENmzzC6FiY4V4eFcv-WGlYDXLKpc3zuf5F3TD_y2Urc5NEx89anijtW5mgvDkNOywdlwRthNTryiSdsAeU14DI64QEfBfYJGZLCyAVCxsyOo9FrOp5D6KzeJMN-cYJ0SmYj8c",
     imageAlt:     "Mobile banking application dashboard mockup — minimalist charcoal and white UI",
     imageLeft:    true,
+    href:         "/work/",
   },
+  /* TEMPLATE CASE STUDY 2 */
   {
-    category:     "Lifestyle",
+    id:           "luxury-retail-ecosystem",
+    category:     "E-Commerce & UX",
     categoryBg:   "bg-secondary-fixed",
     categoryText: "text-on-secondary-fixed-variant",
     title:        "Luxury Retail Ecosystem",
@@ -36,9 +51,12 @@ const projects: Project[] = [
     imageUrl:     "https://lh3.googleusercontent.com/aida-public/AB6AXuBXg9pzJ-TRVgtrJ96zTGgktcDzA_KgAzGNfVd140oPHO3YMeybUawaAqtJTAcP6njWD-zxFq3a6AapVD8Mtv6cB59goFsKnBGMOTSsx6VBRYrS8LVHS4SHOko5llmQr_eKezyi11L1fjfF8KQpQmQWE6wQx_nbyG8TCrtsc_jWBNm6MfdBl0DS8ls8tlvl8Fy86pjc0DKyDE6_LJpbIqA287K2xpficAvfvQSfOhVruyGaK165Cur24AXymdzfYJZ1M4mjkS04sbo",
     imageAlt:     "Editorial luxury fashion website — bold typography with charcoal and ivory palette",
     imageLeft:    false,
+    href:         "/work/",
   },
+  /* TEMPLATE CASE STUDY 3 */
   {
-    category:     "Enterprise",
+    id:           "saas-analytics",
+    category:     "Enterprise & Architecture",
     categoryBg:   "bg-primary-fixed",
     categoryText: "text-on-primary-fixed-variant",
     title:        "Next-Gen SaaS Analytics",
@@ -46,33 +64,34 @@ const projects: Project[] = [
     imageUrl:     "https://lh3.googleusercontent.com/aida-public/AB6AXuDdOneOMgBaJxd91LW6PbFv2oswMugTcPs4T3DX0r-JQsFTOtr2edIJhFkj_cke_JN_IM-vAO6E7Ykkj1k7RdXfid1nLvxjUvNeMiGXvmSIHSvA4x0F5kR0T6dJFfuMq27fBG5F4w5C0d341T_TCvS6iy00rnGZUCe47aqo6c0BpBXYt98hvjG5yV6erhwH9gpYsNAzUGwZpLMHT-GF9AZFsyzQakVBmK2xDZsG_k1fJAPqnA_oDbYd7ana_No9uFgqZiMRS6l2OZc",
     imageAlt:     "Corporate SaaS intranet dashboard with data visualisation charts in a glass-walled office",
     imageLeft:    true,
+    href:         "/work/",
   },
 ];
 ---
 
 <section
-  id="services"
-  class="py-[var(--spacing-section-padding)] bg-surface"
+  id="projects"
+  class="py-16 md:py-24 lg:py-32 bg-surface"
   aria-labelledby="projects-heading"
 >
-  <div class="container max-w-[var(--spacing-container-max)] mx-auto px-[var(--spacing-margin-mobile)] md:px-[var(--spacing-margin-desktop)]">
+  <div class="max-w-[var(--spacing-container-max)] mx-auto px-[var(--spacing-margin-mobile)] md:px-[var(--spacing-margin-desktop)]">
 
     <!-- Section Header -->
-    <div class="flex justify-between items-end mb-16 scroll-reveal">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 sm:mb-16 md:mb-20 scroll-reveal">
       <div>
-        <span class="font-plus-jakarta-sans text-[12px] tracking-[0.1em] font-bold text-secondary uppercase">
-          Selected Work
+        <span class="font-plus-jakarta-sans text-[11px] sm:text-[12px] tracking-[0.15em] font-bold text-secondary uppercase bg-surface-container px-3 py-1 rounded">
+          Selected Interventions
         </span>
         <h2
           id="projects-heading"
-          class="font-plus-jakarta-sans font-semibold text-primary mt-2 text-[48px] leading-[1.2] tracking-tight"
+          class="font-plus-jakarta-sans font-extrabold text-primary mt-3 text-[32px] sm:text-[42px] md:text-[48px] leading-[1.15] tracking-tight uppercase"
         >
-          Case Studies
+          Featured Case Studies
         </h2>
       </div>
       <a
         href="/work/"
-        class="hidden md:flex items-center gap-2 text-primary font-bold group transition-all duration-200 hover:gap-3"
+        class="hidden md:inline-flex items-center gap-2 text-primary font-bold text-[14px] uppercase tracking-wider group transition-all duration-200 hover:gap-3"
         aria-label="View all projects"
       >
         View All Projects
@@ -81,20 +100,20 @@ const projects: Project[] = [
     </div>
 
     <!-- Project List -->
-    <div class="space-y-24">
+    <div class="space-y-16 sm:space-y-20 md:space-y-28">
       {projects.map((project) => (
-        <article class={`grid grid-cols-1 md:grid-cols-12 gap-[var(--spacing-gutter)] items-center`}>
+        <article class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
 
-          <!-- Image -->
+          <!-- Image Container -->
           <div
             class={[
-              "md:col-span-7 bg-surface-container-low overflow-hidden rounded-sm",
-              !project.imageLeft ? "md:order-2" : "",
+              "lg:col-span-7 bg-surface-container-low overflow-hidden rounded-xl border border-outline-variant/70 shadow-sm",
+              !project.imageLeft ? "lg:order-2" : "",
             ].join(" ")}
           >
             <div
               class={[
-                "w-full aspect-video bg-cover bg-center transition-transform duration-700 hover:scale-105",
+                "w-full aspect-[16/10] sm:aspect-video bg-cover bg-center transition-transform duration-700 hover:scale-105",
                 project.imageLeft ? "scroll-reveal-left" : "scroll-reveal-right",
               ].join(" ")}
               style={`background-image: url('${project.imageUrl}');`}
@@ -103,36 +122,36 @@ const projects: Project[] = [
             ></div>
           </div>
 
-          <!-- Text -->
+          <!-- Text Container -->
           <div
             class={[
-              "md:col-span-5 scroll-reveal",
-              project.imageLeft ? "md:pl-12" : "md:order-1 md:pr-12",
+              "lg:col-span-5 scroll-reveal",
+              project.imageLeft ? "lg:pl-6" : "lg:order-1 lg:pr-6",
             ].join(" ")}
           >
             <span
               class={[
-                "font-plus-jakarta-sans text-[12px] tracking-[0.1em] font-bold px-3 py-1 inline-block mb-4 rounded-sm",
+                "font-plus-jakarta-sans text-[11px] tracking-[0.12em] font-bold px-3 py-1 inline-block mb-4 rounded-sm uppercase",
                 project.categoryBg,
                 project.categoryText,
               ].join(" ")}
             >
-              {project.category.toUpperCase()}
+              {project.category}
             </span>
 
-            <h3 class="font-plus-jakarta-sans font-semibold text-primary text-[32px] leading-tight mb-4">
+            <h3 class="font-plus-jakarta-sans font-bold text-primary text-[24px] sm:text-[30px] md:text-[36px] leading-tight mb-4">
               {project.title}
             </h3>
 
-            <p class="font-plus-jakarta-sans text-[16px] leading-relaxed text-on-surface-variant mb-8">
+            <p class="font-plus-jakarta-sans text-[15px] sm:text-[16px] leading-relaxed text-on-surface-variant mb-8">
               {project.description}
             </p>
 
             <a
-              href="/work/"
-              class="bg-primary text-on-primary px-6 py-3 rounded-sm font-bold transition-all hover:bg-primary-container active:scale-95 inline-flex items-center gap-2 group"
+              href={project.href || "/work/"}
+              class="bg-primary text-on-primary px-6 py-3.5 rounded-lg font-bold text-[14px] transition-all duration-200 hover:bg-primary-container hover:shadow-lg active:scale-95 inline-flex items-center gap-2 group"
             >
-              Read Case Study
+              Explore Project
               <span class="material-symbols-outlined text-[18px] transition-transform group-hover:translate-x-1" aria-hidden="true">
                 arrow_forward
               </span>
@@ -143,11 +162,11 @@ const projects: Project[] = [
       ))}
     </div>
 
-    <!-- Mobile: View All link -->
-    <div class="text-center mt-20 md:hidden">
-      <a href="/work/" class="text-primary font-bold inline-flex items-center gap-2">
+    <!-- Mobile View All Button -->
+    <div class="text-center mt-12 md:hidden">
+      <a href="/work/" class="bg-surface-container text-primary font-bold px-6 py-3 rounded-lg inline-flex items-center gap-2 border border-outline-variant">
         View All Projects
-        <span class="material-symbols-outlined" aria-hidden="true">arrow_right_alt</span>
+        <span class="material-symbols-outlined text-[18px]" aria-hidden="true">arrow_right_alt</span>
       </a>
     </div>
 
