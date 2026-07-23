@@ -4,12 +4,16 @@
  * Uses a minimal inline script for toggle/close/overlay/keyboard ESC.
  */
 
+const pathname = Astro.url.pathname;
+
 const navLinks = [
-  { label: "Work",     href: "/#work",     icon: "work"    },
-  { label: "About",    href: "/#about",    icon: "person"  },
-  { label: "Services", href: "/#services", icon: "build"   },
-  { label: "Contact",  href: "/#contact",  icon: "mail"    },
+  { label: "Work",     href: "/work/",     icon: "work"    },
+  { label: "About",    href: "/about/",    icon: "person"  },
+  { label: "Services", href: "/services/", icon: "build"   },
+  { label: "Contact",  href: "/contact/",  icon: "mail"    },
 ];
+
+const isActive = (href: string) => pathname === href || pathname === href.slice(0, -1);
 ---
 
 <!-- Overlay -->
@@ -45,12 +49,12 @@ const navLinks = [
 
     <!-- Nav Links -->
     <nav class="flex flex-col gap-2" aria-label="Drawer navigation">
-      {navLinks.map((link, i) => (
+      {navLinks.map((link) => (
         <a
           href={link.href}
           class={[
             "flex items-center gap-4 p-3 -mx-3 rounded-lg transition-all duration-200",
-            i === 0
+            isActive(link.href)
               ? "text-primary font-bold bg-surface-container-low"
               : "text-secondary hover:bg-surface-container hover:text-primary",
           ].join(" ")}

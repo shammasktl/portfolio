@@ -60,17 +60,25 @@ const {
 
     <!-- Image Column -->
     <div class="md:col-span-5 order-1 md:order-2 flex justify-center md:justify-end scroll-reveal-right">
-      <div class="relative w-64 h-64 md:w-80 md:h-80 overflow-hidden border border-outline-variant rounded-sm shadow-sm">
+      <div class="md:col-span-6 relative flex justify-center md:justify-end scroll-reveal-right">
+      <div class="relative w-full aspect-[4/5] max-w-[480px]">
+        <!-- Decorative rotated border -->
+        <div
+          class="absolute -inset-4 border border-outline-variant rounded-lg -z-10 transform rotate-2"
+          aria-hidden="true"
+        ></div>
+
         <img
           src={portraitUrl}
-          alt={portraitAlt}
-          width="320"
-          height="320"
+          alt="Mohammed Shammas — Developer and Problem Solver"
+          width="480"
+          height="600"
           loading="eager"
           decoding="async"
-          class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 ease-in-out scale-110 hover:scale-100"
+          class="w-full h-full object-cover rounded-lg shadow-sm border border-outline-variant grayscale hover:grayscale-0 transition-all duration-700"
         />
       </div>
+    </div>
     </div>
 
   </div>

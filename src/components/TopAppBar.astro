@@ -25,34 +25,34 @@ const isActive = (href: string) => pathname === href.split("#")[0];
 
 <header
   id="top-app-bar"
-  class="fixed top-0 w-full z-50 bg-surface border-b border-outline-variant transition-all duration-300 h-20"
+  class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-md border-b border-outline-variant/70 transition-all duration-300 h-16 sm:h-20"
 >
   <div class="flex justify-between items-center h-full px-[var(--spacing-margin-mobile)] md:px-[var(--spacing-margin-desktop)] max-w-[var(--spacing-container-max)] mx-auto">
 
     <!-- Left: Hamburger + Logo -->
-    <div class="flex items-center gap-4">
+    <div class="flex items-center gap-3 sm:gap-4">
       <button
         id="drawer-toggle"
         aria-label="Open navigation menu"
         aria-expanded="false"
         aria-controls="nav-drawer"
-        class="cursor-pointer active:opacity-70 text-primary block md:hidden"
+        class="cursor-pointer p-1.5 rounded-md hover:bg-surface-container active:scale-95 text-primary block md:hidden transition-transform"
       >
-        <span class="material-symbols-outlined">menu_open</span>
+        <span class="material-symbols-outlined text-[26px]">menu_open</span>
       </button>
 
-      <a href="/" class="font-plus-jakarta-sans font-bold tracking-tighter text-primary text-[20px] md:text-[24px] uppercase hover:opacity-80 transition-opacity">
+      <a href="/" class="font-plus-jakarta-sans font-extrabold tracking-tighter text-primary text-[18px] sm:text-[22px] md:text-[24px] uppercase hover:opacity-80 transition-opacity">
         {name}
       </a>
     </div>
 
-    <!-- Center/Right: Desktop Nav -->
-    <nav class="hidden md:flex items-center gap-8" aria-label="Primary navigation">
+    <!-- Center/Right: Desktop & Tablet Nav -->
+    <nav class="hidden md:flex items-center gap-6 lg:gap-8" aria-label="Primary navigation">
       {navLinks.map((link) => (
         <a
           href={link.href}
           class={[
-            "font-plus-jakarta-sans text-[12px] tracking-[0.1em] font-bold py-2 transition-colors duration-300",
+            "font-plus-jakarta-sans text-[12px] lg:text-[13px] tracking-[0.1em] font-bold py-2 transition-colors duration-300",
             isActive(link.href)
               ? "text-primary border-b-2 border-primary"
               : "text-secondary hover:text-primary",
@@ -64,3 +64,4 @@ const isActive = (href: string) => pathname === href.split("#")[0];
     </nav>
   </div>
 </header>
+

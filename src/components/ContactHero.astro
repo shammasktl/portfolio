@@ -42,7 +42,7 @@ const {
   title        = "Let's Connect.",
   description  = "I am currently available for executive consulting, high-level project partnerships, and global technical leadership engagements. Reach out to discuss how we can create structural excellence together.",
   contactLinks = defaultContactLinks,
-  portraitUrl  = "https://lh3.googleusercontent.com/aida-public/AB6AXuDGDW2Tn2xV81UKm6IYd-UF6KGpmFzMBAu6hZlptgS228BSkb4Uj4_lhkoqRuDdbBJ3bydQnAex9iRCAagEAESYmiGU1LGoG5ZnIYsQybHxfad-RU4mkGNjzz8FvZHDCIDqnidSqewfHR74wugjksPfge-D2weS1IUJg35_mlWURMphgLcXOhRJFZUCGul0KtVC2NpRO9pl5m283HQqf3Gpe9zxbrnnGKfoyJfEGjZzdJhswArVxT_h8Z-wheECtej31dUO81dERFU",
+  portraitUrl  = "https://lh3.googleusercontent.com/aida-public/AB6AXuCR5z3jho37U12VEDC29d7D_OHQ67jjVq1uhdHEnBtD80rwaWEAaWaeZqaLUpuWt8CBqp2D22ePWWl4CiTg5CZsVFrakZLZyjT8lJZUBu9oz20iTT_YB-vb2ZXiS6TzYr6oB_LV30qgiSQd-x2mUCFYdk7emMdEyDhza8pQfxUBIRCZDwaaRZRgrkWq0xH3NBB9JndmJrypvToppSsCJtLPvUP57xluxZAIzpbWe5oWK2ySQJ3kewHSF5MLo9d1kpwGlr3POrBOE5s",
   portraitAlt  = "Mohammed Shammas — Executive Portrait",
 } = Astro.props;
 ---
@@ -86,17 +86,25 @@ const {
 
     <!-- Right Image Column -->
     <div class="lg:col-span-5 scroll-reveal-right">
-      <div class="relative w-full aspect-[4/5] bg-surface-container-high overflow-hidden rounded-sm border border-outline-variant shadow-sm">
+      <div class="md:col-span-6 relative flex justify-center md:justify-end scroll-reveal-right">
+      <div class="relative w-full aspect-[4/5] max-w-[480px]">
+        <!-- Decorative rotated border -->
+        <div
+          class="absolute -inset-4 border border-outline-variant rounded-lg -z-10 transform rotate-2"
+          aria-hidden="true"
+        ></div>
+
         <img
           src={portraitUrl}
-          alt={portraitAlt}
+          alt="Mohammed Shammas — Developer and Problem Solver"
           width="480"
           height="600"
           loading="eager"
           decoding="async"
-          class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 ease-in-out scale-105 hover:scale-100"
+          class="w-full h-full object-cover rounded-lg shadow-sm border border-outline-variant grayscale hover:grayscale-0 transition-all duration-700"
         />
       </div>
+    </div>
     </div>
 
   </div>
