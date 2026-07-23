@@ -1,0 +1,308 @@
+---
+/**
+ * ServicesFAQ — Minimal, editorial FAQ accordion component.
+ * Matches the site's design system: clean type, precise spacing, subtle
+ * border treatments, and accessible keyboard interactions.
+ * Category filtering is retained with a cleaner pill-based UI.
+ */
+
+interface FAQItem {
+  id:       string;
+  category: "process" | "tech" | "pricing" | "support";
+  question: string;
+  answer:   string;
+}
+
+const categories = [
+  { id: "all",     label: "All"       },
+  { id: "process", label: "Process"   },
+  { id: "tech",    label: "Tech"      },
+  { id: "pricing", label: "Pricing"   },
+  { id: "support", label: "Support"   },
+];
+
+const faqs: FAQItem[] = [
+  {
+    id:       "faq-1",
+    category: "process",
+    question: "What does your typical project engagement look like?",
+    answer:
+      "Every project follows a structured 4-phase methodology: Discovery & Blueprint, System Architecture, Agile Development, and Launch & Optimization. Communication is async-friendly with weekly milestone check-ins and clear deliverables at every stage.",
+  },
+  {
+    id:       "faq-2",
+    category: "tech",
+    question: "Which technologies and frameworks do you work with?",
+    answer:
+      "My primary stack is Astro, React, Next.js, TypeScript, and Node.js with Tailwind CSS or Vanilla CSS. For APIs I use GraphQL and REST. Stack decisions are always project-driven — I recommend what's right for your product, not what's trendy.",
+  },
+  {
+    id:       "faq-3",
+    category: "pricing",
+    question: "How are projects priced — fixed scope or retainer?",
+    answer:
+      "Both models are available. Fixed-scope project agreements suit well-defined builds such as marketing sites or web applications. Monthly advisory and engineering retainers are ideal for ongoing feature development, architecture oversight, and performance monitoring.",
+  },
+  {
+    id:       "faq-4",
+    category: "process",
+    question: "How long does a typical project take to complete?",
+    answer:
+      "Marketing sites and executive portfolios typically launch in 2 to 4 weeks. Complex web applications or full platform migrations range from 6 to 12 weeks depending on scope, integrations, and iteration cycles. A timeline is always defined during the Discovery phase.",
+  },
+  {
+    id:       "faq-5",
+    category: "tech",
+    question: "How do you ensure full mobile responsiveness?",
+    answer:
+      "Mobile compatibility is built from the ground up — not patched on at the end. All layouts use mobile-first fluid grids, hardware-accelerated CSS animations, responsive images with lazy-loading, and are tested across real mobile viewports before delivery.",
+  },
+  {
+    id:       "faq-6",
+    category: "support",
+    question: "Do you offer post-launch support and maintenance?",
+    answer:
+      "Yes. Every delivery includes a 30-day post-launch warranty covering bug fixes and adjustments. Beyond that, optional monthly retainers cover security patches, content updates, performance regression audits, and SEO maintenance.",
+  },
+  {
+    id:       "faq-7",
+    category: "pricing",
+    question: "How do we kick off a new project?",
+    answer:
+      "Send a message via the Contact page with a brief description of your project. We will schedule a 30-minute discovery call to discuss requirements, timeline, and budget, followed by a formal proposal within 48 hours.",
+  },
+];
+---
+
+<section
+  id="faq"
+  class="py-[var(--spacing-section-padding)] bg-surface"
+  aria-labelledby="faq-heading"
+>
+  <div class="container max-w-[var(--spacing-container-max)] mx-auto px-[var(--spacing-margin-mobile)] md:px-[var(--spacing-margin-desktop)]">
+
+    <!-- Section Header -->
+    <div class="flex flex-col md:flex-row md:justify-between md:items-end mb-16 scroll-reveal gap-4">
+      <div>
+        <span class="font-plus-jakarta-sans text-[12px] tracking-[0.1em] font-bold text-secondary uppercase">
+          FAQ
+        </span>
+        <h2
+          id="faq-heading"
+          class="font-plus-jakarta-sans font-semibold text-primary mt-2 text-[40px] md:text-[48px] leading-[1.2] tracking-tight"
+        >
+          Common Questions
+        </h2>
+      </div>
+      <a
+        href="/contact/"
+        class="hidden md:inline-flex items-center gap-2 text-primary font-plus-jakarta-sans font-bold text-[13px] tracking-[0.04em] group transition-all duration-200 hover:gap-3"
+        aria-label="Ask a question via contact page"
+      >
+        Ask Directly
+        <span class="inline-block transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
+      </a>
+    </div>
+
+    <!-- Category Filters + Search Row -->
+    <div class="mb-10 flex flex-col sm:flex-row gap-4 items-start sm:items-center scroll-reveal">
+
+      <!-- Category Pills -->
+      <div
+        class="flex items-center gap-2 flex-wrap overflow-x-auto pb-1"
+        role="tablist"
+        aria-label="FAQ categories"
+      >
+        {categories.map((cat) => (
+          <button
+            role="tab"
+            data-category={cat.id}
+            aria-selected={cat.id === "all" ? "true" : "false"}
+            class={[
+              "faq-tab-btn whitespace-nowrap px-4 py-2 rounded-sm font-plus-jakarta-sans text-[11px] tracking-[0.1em] font-bold uppercase transition-all cursor-pointer",
+              cat.id === "all"
+                ? "bg-primary text-on-primary"
+                : "text-secondary border border-outline-variant hover:border-primary hover:text-primary",
+            ].join(" ")}
+          >
+            {cat.label}
+          </button>
+        ))}
+      </div>
+
+      <!-- Search -->
+      <div class="relative sm:ml-auto w-full sm:w-auto">
+        <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-secondary text-[18px] pointer-events-none">
+          search
+        </span>
+        <input
+          type="text"
+          id="faq-search"
+          placeholder="Search..."
+          aria-label="Search frequently asked questions"
+          class="w-full sm:w-56 bg-surface-container-low border border-outline-variant rounded-sm py-2.5 pl-10 pr-4 font-plus-jakarta-sans text-[13px] text-primary placeholder:text-secondary focus:outline-none focus:border-primary transition-colors"
+        />
+      </div>
+    </div>
+
+    <!-- Accordion List -->
+    <div class="scroll-stagger" id="faq-container" role="list">
+      {faqs.map((faq, i) => (
+        <div
+          data-faq-id={faq.id}
+          data-faq-category={faq.category}
+          class="faq-card scroll-stagger-item border-t border-outline-variant"
+          role="listitem"
+        >
+          <button
+            type="button"
+            id={`faq-btn-${i}`}
+            aria-expanded="false"
+            aria-controls={`faq-ans-${i}`}
+            class="faq-trigger w-full flex justify-between items-center text-left py-6 cursor-pointer select-none gap-6 group focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+          >
+            <span class="font-plus-jakarta-sans font-semibold text-[16px] sm:text-[18px] text-primary group-hover:text-secondary transition-colors leading-snug">
+              {faq.question}
+            </span>
+
+            <span class="material-symbols-outlined faq-icon text-primary text-[22px] shrink-0 transition-transform duration-300">
+              add
+            </span>
+          </button>
+
+          <div
+            id={`faq-ans-${i}`}
+            role="region"
+            aria-labelledby={`faq-btn-${i}`}
+            class="faq-content max-h-0 overflow-hidden transition-[max-height] duration-300 ease-in-out"
+          >
+            <p class="font-plus-jakarta-sans text-[15px] leading-relaxed text-secondary pb-8 pr-8 md:pr-16">
+              {faq.answer}
+            </p>
+          </div>
+        </div>
+      ))}
+
+      <!-- Last border bottom line -->
+      <div class="border-t border-outline-variant"></div>
+
+      <!-- No results -->
+      <div id="faq-no-results" class="hidden py-16 text-center">
+        <p class="font-plus-jakarta-sans text-[15px] text-secondary">
+          No matching questions found.
+          <button id="faq-reset-btn" class="text-primary underline underline-offset-4 cursor-pointer ml-1">
+            Reset
+          </button>
+        </p>
+      </div>
+    </div>
+
+    <!-- Bottom CTA Row -->
+    <div class="mt-16 pt-8 border-t border-outline-variant flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 scroll-reveal">
+      <div>
+        <p class="font-plus-jakarta-sans font-semibold text-[16px] text-primary">Still have a question?</p>
+        <p class="font-plus-jakarta-sans text-[14px] text-secondary mt-1">I reply to every message within 24 hours.</p>
+      </div>
+      <a
+        href="/contact/"
+        class="bg-primary text-on-primary px-8 py-4 rounded-sm font-plus-jakarta-sans font-bold text-[12px] tracking-[0.08em] hover:opacity-90 transition-opacity shrink-0 w-full sm:w-auto text-center"
+      >
+        GET IN TOUCH
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<script is:inline>
+  (function () {
+    const triggers   = document.querySelectorAll(".faq-trigger");
+    const tabBtns    = document.querySelectorAll(".faq-tab-btn");
+    const searchEl   = document.getElementById("faq-search");
+    const faqCards   = document.querySelectorAll(".faq-card");
+    const noResults  = document.getElementById("faq-no-results");
+    const resetBtn   = document.getElementById("faq-reset-btn");
+
+    let currentCategory = "all";
+    let searchQuery     = "";
+
+    /* ── Accordion ─────────────────────────────────── */
+    triggers.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        const expanded   = btn.getAttribute("aria-expanded") === "true";
+        const contentId  = btn.getAttribute("aria-controls");
+        const content    = document.getElementById(contentId);
+        const icon       = btn.querySelector(".faq-icon");
+
+        /* Close all others */
+        triggers.forEach(function (other) {
+          if (other === btn) return;
+          other.setAttribute("aria-expanded", "false");
+          const oc = document.getElementById(other.getAttribute("aria-controls"));
+          const oi = other.querySelector(".faq-icon");
+          if (oc) { oc.style.maxHeight = "0px"; }
+          if (oi) { oi.textContent = "add"; oi.style.transform = "rotate(0deg)"; }
+        });
+
+        if (expanded) {
+          btn.setAttribute("aria-expanded", "false");
+          if (content) content.style.maxHeight = "0px";
+          if (icon) { icon.textContent = "add"; icon.style.transform = "rotate(0deg)"; }
+        } else {
+          btn.setAttribute("aria-expanded", "true");
+          if (content) content.style.maxHeight = content.scrollHeight + "px";
+          if (icon) { icon.textContent = "close"; icon.style.transform = "rotate(90deg)"; }
+        }
+      });
+    });
+
+    /* ── Filter Logic ───────────────────────────────── */
+    function applyFilter() {
+      var visible = 0;
+      faqCards.forEach(function (card) {
+        var cat  = card.getAttribute("data-faq-category");
+        var text = (card.textContent || "").toLowerCase();
+        var show = (currentCategory === "all" || cat === currentCategory) &&
+                   (searchQuery === "" || text.includes(searchQuery));
+        card.style.display = show ? "" : "none";
+        if (show) visible++;
+      });
+      if (noResults) noResults.classList.toggle("hidden", visible > 0);
+    }
+
+    /* ── Category Tabs ──────────────────────────────── */
+    tabBtns.forEach(function (tab) {
+      tab.addEventListener("click", function () {
+        tabBtns.forEach(function (t) {
+          t.setAttribute("aria-selected", "false");
+          t.classList.remove("bg-primary", "text-on-primary");
+          t.classList.add("text-secondary", "border", "border-outline-variant");
+        });
+        tab.setAttribute("aria-selected", "true");
+        tab.classList.add("bg-primary", "text-on-primary");
+        tab.classList.remove("text-secondary", "border", "border-outline-variant");
+        currentCategory = tab.getAttribute("data-category") || "all";
+        applyFilter();
+      });
+    });
+
+    /* ── Search ─────────────────────────────────────── */
+    if (searchEl) {
+      searchEl.addEventListener("input", function (e) {
+        searchQuery = (e.target.value || "").toLowerCase().trim();
+        applyFilter();
+      });
+    }
+
+    /* ── Reset ──────────────────────────────────────── */
+    if (resetBtn) {
+      resetBtn.addEventListener("click", function () {
+        currentCategory = "all";
+        searchQuery     = "";
+        if (searchEl) searchEl.value = "";
+        if (tabBtns[0]) tabBtns[0].click();
+      });
+    }
+
+  })();
+</script>

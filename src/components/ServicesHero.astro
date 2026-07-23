@@ -1,0 +1,114 @@
+---
+/**
+ * ServicesHero — Premier hero section for the Services page.
+ * Editorial layout matching the portfolio's established design language:
+ * clean type hierarchy, subtle decorative elements, and purposeful whitespace.
+ */
+
+export interface Props {
+  badge?:       string;
+  title?:       string;
+  description?: string;
+}
+
+const {
+  badge       = "SERVICES",
+  title       = "Precision craft. Scalable architecture. Zero compromise.",
+  description = "I bridge the gap between technical leadership and pixel-perfect execution — building fast, resilient, and beautifully designed digital products for ambitious teams and founders.",
+} = Astro.props;
+
+const disciplines = [
+  "Full-Stack Engineering",
+  "UI / UX Design Systems",
+  "Technical Advisory",
+  "Performance & SEO",
+];
+---
+
+<section
+  class="relative min-h-[88vh] flex items-center bg-surface overflow-hidden"
+  aria-labelledby="services-hero-heading"
+>
+
+  <!-- Decorative hairline grid -->
+  <div
+    class="absolute inset-0 pointer-events-none"
+    aria-hidden="true"
+    style="background-image: linear-gradient(to right, rgba(0,0,0,0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(0,0,0,0.04) 1px, transparent 1px); background-size: 64px 64px;"
+  ></div>
+
+  <!-- Decorative accent block — top right -->
+  <div
+    class="absolute top-0 right-0 w-1/3 h-full bg-surface-container-low border-l border-outline-variant hidden md:block"
+    aria-hidden="true"
+  ></div>
+
+  <div class="relative z-10 container max-w-[var(--spacing-container-max)] mx-auto px-[var(--spacing-margin-mobile)] md:px-[var(--spacing-margin-desktop)] py-24 grid grid-cols-1 md:grid-cols-12 gap-[var(--spacing-gutter)] items-center w-full">
+
+    <!-- Left: Text Column -->
+    <div class="md:col-span-7 scroll-reveal">
+      <span class="font-plus-jakarta-sans text-[12px] tracking-[0.2em] font-bold text-secondary mb-6 block uppercase">
+        {badge}
+      </span>
+
+      <h1
+        id="services-hero-heading"
+        class="font-plus-jakarta-sans font-bold tracking-tight text-primary text-[38px] sm:text-[52px] md:text-[68px] leading-[1.08] mb-8"
+      >
+        {title}
+      </h1>
+
+      <p class="font-plus-jakarta-sans text-[16px] md:text-[18px] leading-relaxed text-on-surface-variant max-w-xl mb-12">
+        {description}
+      </p>
+
+      <div class="flex flex-wrap items-center gap-4">
+        <a
+          href="#services-grid"
+          class="bg-primary text-on-primary px-8 py-4 rounded-sm font-plus-jakarta-sans font-bold text-[13px] tracking-[0.08em] inline-flex items-center gap-2 hover:opacity-90 transition-opacity active:scale-95"
+        >
+          VIEW SERVICES
+          <span class="material-symbols-outlined text-[18px]" aria-hidden="true">south</span>
+        </a>
+        <a
+          href="/contact/"
+          class="border border-primary text-primary px-8 py-4 rounded-sm font-plus-jakarta-sans font-bold text-[13px] tracking-[0.08em] hover:bg-surface-container transition-colors active:scale-95 inline-flex"
+        >
+          START A PROJECT
+        </a>
+      </div>
+    </div>
+
+    <!-- Right: Discipline List Panel -->
+    <div class="md:col-span-5 md:flex justify-end scroll-reveal-right">
+      <div class="bg-surface-container-lowest border border-outline-variant rounded-sm p-8 w-full md:max-w-xs shadow-sm">
+        <h2 class="font-plus-jakarta-sans text-[11px] tracking-[0.18em] font-bold text-secondary uppercase mb-6">
+          Core Disciplines
+        </h2>
+
+        <ul class="space-y-0 divide-y divide-outline-variant">
+          {disciplines.map((item, i) => (
+            <li class="flex items-center justify-between py-4 group">
+              <span class="font-plus-jakarta-sans text-[15px] font-semibold text-primary group-hover:translate-x-1 transition-transform duration-200">
+                {item}
+              </span>
+              <span class="font-plus-jakarta-sans text-[11px] font-bold text-secondary/60 tabular-nums">
+                0{i + 1}
+              </span>
+            </li>
+          ))}
+        </ul>
+
+        <div class="mt-8 pt-6 border-t border-outline-variant">
+          <p class="font-plus-jakarta-sans text-[12px] text-secondary leading-relaxed">
+            Available for select engagements in 2025.
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Bottom border line -->
+  <div class="absolute bottom-0 left-0 right-0 h-px bg-outline-variant" aria-hidden="true"></div>
+</section>

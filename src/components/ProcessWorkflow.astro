@@ -1,0 +1,90 @@
+---
+/**
+ * ProcessWorkflow — 4-phase engagement model.
+ * Styled after JourneyTimeline.astro with sticky header + scrolling entries,
+ * consistent with the portfolio's established design language.
+ */
+
+interface Step {
+  period:      string;
+  title:       string;
+  description: string;
+  isCurrent?:  boolean;
+}
+
+const steps: Step[] = [
+  {
+    period:      "PHASE 01",
+    title:       "Discovery & Blueprint",
+    description: "Deep dive into product vision, business constraints, target audience, and existing technical landscape. The output is a clear, unambiguous execution roadmap — no assumptions, no wasted sprints.",
+    isCurrent:   true,
+  },
+  {
+    period:      "PHASE 02",
+    title:       "System & UX Architecture",
+    description: "Designing wireframes, responsive layout grids, tokenized design systems, and component hierarchies before a single line of production code is written. Architecture decisions are documented and reviewed.",
+  },
+  {
+    period:      "PHASE 03",
+    title:       "Agile Development",
+    description: "Iterative full-stack engineering with clean, modular, type-checked code. Frequent milestone demos ensure we ship exactly what was agreed — with zero scope creep and full design fidelity.",
+  },
+  {
+    period:      "PHASE 04",
+    title:       "Launch & Optimization",
+    description: "Production deployment via CI/CD, Core Web Vitals audit, analytics instrumentation, and a 30-day post-launch warranty. Performance is monitored and regressions are addressed immediately.",
+  },
+];
+---
+
+<section
+  class="py-[var(--spacing-section-padding)] bg-surface-container-low"
+  aria-labelledby="process-heading"
+>
+  <div class="px-[var(--spacing-margin-mobile)] md:px-[var(--spacing-margin-desktop)] max-w-[var(--spacing-container-max)] mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-[var(--spacing-gutter)]">
+
+      <!-- Sticky Section Heading — mirroring JourneyTimeline.astro -->
+      <div class="md:col-span-4 scroll-reveal">
+        <span class="font-plus-jakarta-sans text-[12px] tracking-[0.1em] font-bold text-secondary uppercase block mb-3">
+          How We Work
+        </span>
+        <h2
+          id="process-heading"
+          class="font-plus-jakarta-sans font-semibold text-primary text-[32px] md:text-[48px] leading-tight sticky top-32"
+        >
+          Structured Engagement Process
+        </h2>
+      </div>
+
+      <!-- Timeline Content — matches JourneyTimeline layout -->
+      <div class="md:col-span-8 space-y-16 scroll-stagger">
+        {steps.map((step) => (
+          <div class="scroll-stagger-item border-l-2 border-outline-variant pl-8 relative">
+
+            <!-- Timeline Indicator Node -->
+            <div
+              class={[
+                "absolute w-4 h-4 left-[-9px] top-0",
+                step.isCurrent ? "bg-primary" : "bg-outline-variant",
+              ].join(" ")}
+              aria-hidden="true"
+            ></div>
+
+            <span class="font-plus-jakarta-sans text-[12px] tracking-[0.1em] font-bold text-secondary block mb-2 uppercase">
+              {step.period}
+            </span>
+            <h3 class="font-plus-jakarta-sans font-semibold text-[24px] md:text-[32px] text-primary mb-4 leading-tight">
+              {step.title}
+            </h3>
+            <p class="font-plus-jakarta-sans text-[16px] leading-relaxed text-on-surface-variant">
+              {step.description}
+            </p>
+
+          </div>
+        ))}
+      </div>
+
+    </div>
+  </div>
+</section>
