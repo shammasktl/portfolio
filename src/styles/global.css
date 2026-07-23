@@ -70,9 +70,9 @@
   /* ── Spacing ─────────────────────────────────── */
   --spacing-gutter:           32px;
   --spacing-unit:             8px;
-  --spacing-section-padding:  120px;
+  --spacing-section-padding:  100px;
   --spacing-container-max:    1280px;
-  --spacing-margin-desktop:   64px;
+  --spacing-margin-desktop:   48px;
   --spacing-margin-mobile:    20px;
 
   /* ── Border Radius ───────────────────────────── */
@@ -92,6 +92,13 @@
   --text-label-caps:        12px;
 }
 
+@media (max-width: 768px) {
+  :root {
+    --spacing-section-padding: 60px;
+    --spacing-gutter: 20px;
+  }
+}
+
 /* ─── Reveal Animation ───────────────────────────── */
 .reveal-on-scroll {
   opacity: 0;
@@ -101,6 +108,13 @@
 .reveal-on-scroll.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* ─── Mobile & Tablet Low-CPU Animation Overrides ─── */
+@media (max-width: 1023px) {
+  .scroll-parallax {
+    transform: none !important;
+  }
 }
 
 /* ─── Lenis Smooth Scroll ────────────────────────── */
@@ -124,6 +138,7 @@ html.lenis body {
 /* ─── Custom Scrollbar ───────────────────────────── */
 ::-webkit-scrollbar {
   width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
   background: #f8f9fa;
@@ -136,12 +151,21 @@ html.lenis body {
   background: #75777a;
 }
 
+/* Hide scrollbar utility */
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 /* ─── Header Scroll Shrink ───────────────────────── */
 header {
   transition: all 0.3s ease;
 }
 header.header-scrolled {
-  height: 4rem;
+  height: 3.5rem;
   box-shadow: 0 1px 4px rgba(0,0,0,0.06);
 }
 
@@ -160,3 +184,4 @@ header.header-scrolled {
   display: inline-block;
   vertical-align: middle;
 }
+
