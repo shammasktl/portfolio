@@ -14,8 +14,9 @@ const quickLinks = [
 <Layout
   title="404 — Page Not Found | Mohammed Shammas"
   description="The requested page could not be found. Return to the homepage or explore selected work."
+  robots="noindex, follow"
 >
-  <main class="pt-24 pb-[var(--spacing-section-padding)] flex flex-col justify-center min-h-[70vh]">
+  <section class="pt-24 pb-[var(--spacing-section-padding)] flex flex-col justify-center min-h-[70vh]" aria-labelledby="not-found-heading">
     <section class="px-[var(--spacing-margin-mobile)] md:px-[var(--spacing-margin-desktop)] max-w-[var(--spacing-container-max)] mx-auto text-center scroll-reveal">
 
       <!-- Badge -->
@@ -29,7 +30,7 @@ const quickLinks = [
       </h1>
 
       <!-- Main Headline -->
-      <h2 class="font-plus-jakarta-sans font-semibold text-[28px] sm:text-[36px] md:text-[48px] text-primary mb-6 leading-tight">
+      <h2 id="not-found-heading" class="font-plus-jakarta-sans font-semibold text-[28px] sm:text-[36px] md:text-[48px] text-primary mb-6 leading-tight">
         Page Not Found
       </h2>
 
@@ -73,7 +74,7 @@ const quickLinks = [
       </div>
 
     </section>
-  </main>
+  </section>
 
   <FooterBar />
 </Layout>

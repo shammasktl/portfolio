@@ -82,7 +82,7 @@ const faqs: FAQItem[] = [
   <div class="container max-w-[var(--spacing-container-max)] mx-auto px-[var(--spacing-margin-mobile)] md:px-[var(--spacing-margin-desktop)]">
 
     <!-- Section Header -->
-    <div class="flex flex-col md:flex-row md:justify-between md:items-end mb-16 scroll-reveal gap-4">
+    <header class="flex flex-col md:flex-row md:justify-between md:items-end mb-16 scroll-reveal gap-4">
       <div>
         <span class="font-plus-jakarta-sans text-[12px] tracking-[0.1em] font-bold text-secondary uppercase">
           FAQ
@@ -102,7 +102,7 @@ const faqs: FAQItem[] = [
         Ask Directly
         <span class="inline-block transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
       </a>
-    </div>
+    </header>
 
     <!-- Category Filters + Search Row -->
     <div class="mb-10 flex flex-col sm:flex-row gap-4 items-start sm:items-center scroll-reveal">
@@ -146,9 +146,9 @@ const faqs: FAQItem[] = [
     </div>
 
     <!-- Accordion List -->
-    <div class="scroll-stagger" id="faq-container" role="list">
+    <ul class="scroll-stagger list-none p-0 m-0" id="faq-container" aria-label="Frequently asked questions">
       {faqs.map((faq, i) => (
-        <div
+        <li
           data-faq-id={faq.id}
           data-faq-category={faq.category}
           class="faq-card scroll-stagger-item border-t border-outline-variant"
@@ -180,22 +180,22 @@ const faqs: FAQItem[] = [
               {faq.answer}
             </p>
           </div>
-        </div>
+        </li>
       ))}
 
       <!-- Last border bottom line -->
-      <div class="border-t border-outline-variant"></div>
+      <li class="border-t border-outline-variant list-none" aria-hidden="true"></li>
 
       <!-- No results -->
-      <div id="faq-no-results" class="hidden py-16 text-center">
+      <li id="faq-no-results" class="hidden py-16 text-center list-none">
         <p class="font-plus-jakarta-sans text-[15px] text-secondary">
           No matching questions found.
           <button id="faq-reset-btn" class="text-primary underline underline-offset-4 cursor-pointer ml-1">
             Reset
           </button>
         </p>
-      </div>
-    </div>
+      </li>
+    </ul>
 
     <!-- Bottom CTA Row -->
     <div class="mt-16 pt-8 border-t border-outline-variant flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 scroll-reveal">

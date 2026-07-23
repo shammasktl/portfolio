@@ -8,16 +8,31 @@ interface Props {
   description?: string;
   ogImage?:     string;
   canonical?:   string;
+  robots?:      string;
+  pageType?:    "website" | "profile";
 }
 
 const {
   title       = "Mohammed Shammas | The Developer Cum Solver",
   description = "Crafting digital experiences with precision and purpose. Mohammed Shammas bridges the gap between high-level strategy and pixel-perfect execution for global brands.",
-  ogImage     = "/og-image.png",
-  canonical   = Astro.url.href,
+  ogImage     = "/og-image.svg",
+  canonical   = new URL(Astro.url.pathname, Astro.site ?? Astro.url).href,
+  robots      = "index, follow",
+  pageType    = "website",
 } = Astro.props;
 
 const siteName = "Mohammed Shammas";
+const absoluteOgImage = new URL(ogImage, Astro.site ?? Astro.url).href;
+const siteUrl = new URL("/", Astro.site ?? Astro.url).href;
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: siteName,
+  url: siteUrl,
+  image: absoluteOgImage,
+  jobTitle: "Full-Stack Developer and Digital Problem Solver",
+  sameAs: ["https://github.com/shammasktl", "https://linkedin.com/in/mohammedshammas"],
+};
 ---
 
 <!doctype html>
@@ -30,15 +45,19 @@ const siteName = "Mohammed Shammas";
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="author" content="Mohammed Shammas" />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content={robots} />
     <link rel="canonical" href={canonical} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
 
     <!-- Open Graph / Facebook -->
-    <meta property="og:type"        content="website" />
+    <meta property="og:type"        content={pageType} />
     <meta property="og:url"         content={canonical} />
     <meta property="og:title"       content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image"       content={ogImage} />
+    <meta property="og:image"       content={absoluteOgImage} />
+    <meta property="og:image:alt"   content={`${siteName} — Developer and Problem Solver`} />
+    <meta property="og:image:width"  content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:site_name"   content={siteName} />
     <meta property="og:locale"      content="en_US" />
 
@@ -46,7 +65,9 @@ const siteName = "Mohammed Shammas";
     <meta name="twitter:card"        content="summary_large_image" />
     <meta name="twitter:title"       content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image"       content={ogImage} />
+    <meta name="twitter:url"         content={canonical} />
+    <meta name="twitter:image"       content={absoluteOgImage} />
+    <meta name="twitter:image:alt"   content={`${siteName} — Developer and Problem Solver`} />
 
     <!-- Theme / Favicon -->
     <meta name="theme-color" content="#f8f9fa" />
@@ -59,6 +80,7 @@ const siteName = "Mohammed Shammas";
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap"
     />
+    <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
   </head>
 
   <body class="bg-background text-on-background font-plus-jakarta-sans overflow-x-hidden">
