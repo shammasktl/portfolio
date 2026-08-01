@@ -1,0 +1,366 @@
+---
+import type { CaseStudy } from "../data/caseStudies";
+
+interface Props {
+  caseStudy: CaseStudy;
+}
+
+const { caseStudy } = Astro.props;
+---
+
+<section class="py-16 md:py-24 bg-surface">
+  <div class="max-w-[var(--spacing-container-max)] mx-auto px-[var(--spacing-margin-mobile)] md:px-[var(--spacing-margin-desktop)]">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+
+      <!-- Sticky Left Table of Contents Nav (Desktop Only) -->
+      <aside class="hidden lg:block lg:col-span-3 sticky top-28 space-y-6">
+        <div class="p-6 rounded-xl bg-surface-container-lowest border border-outline-variant shadow-sm">
+          <h4 class="font-plus-jakarta-sans text-[12px] font-extrabold uppercase tracking-widest text-primary mb-4 pb-2 border-b border-outline-variant">
+            Table of Contents
+          </h4>
+          <nav class="space-y-3 font-plus-jakarta-sans text-[13px] font-medium" id="toc-nav">
+            <a href="#challenge" class="toc-link block text-secondary hover:text-primary transition-colors py-1 pl-2 border-l-2 border-transparent">
+              01. The Challenge
+            </a>
+            <a href="#architecture" class="toc-link block text-secondary hover:text-primary transition-colors py-1 pl-2 border-l-2 border-transparent">
+              02. Tech Architecture
+            </a>
+            <a href="#solution" class="toc-link block text-secondary hover:text-primary transition-colors py-1 pl-2 border-l-2 border-transparent">
+              03. UX & Solution
+            </a>
+            <a href="#impact" class="toc-link block text-secondary hover:text-primary transition-colors py-1 pl-2 border-l-2 border-transparent">
+              04. Business Impact
+            </a>
+          </nav>
+        </div>
+
+        <div class="p-6 rounded-xl bg-primary text-on-primary border border-outline-variant shadow-md">
+          <span class="text-[11px] font-bold uppercase tracking-wider text-on-primary-container block mb-2 font-plus-jakarta-sans">Collaborate</span>
+          <h5 class="font-plus-jakarta-sans font-extrabold text-[16px] text-on-primary mb-2">Need a similar solution?</h5>
+          <p class="font-plus-jakarta-sans text-[13px] text-on-primary-container leading-relaxed mb-4">
+            Let's discuss how strategic design and modern architecture can elevate your product.
+          </p>
+          <a
+            href="/contact/"
+            class="inline-flex items-center gap-2 bg-on-primary text-primary font-bold text-[12px] uppercase px-4 py-2.5 rounded hover:bg-surface-container transition-colors"
+          >
+            <span>Book Consultation</span>
+            <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+          </a>
+        </div>
+      </aside>
+
+      <!-- Main Deep-Dive Content Area -->
+      <main class="col-span-1 lg:col-span-9 space-y-20">
+
+        <!-- 01. The Challenge -->
+        <article id="challenge" class="scroll-reveal scroll-mt-28">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="font-plus-jakarta-sans text-[11px] font-extrabold tracking-widest text-on-primary bg-primary px-2.5 py-1 rounded">
+              01
+            </span>
+            <span class="font-plus-jakarta-sans text-[12px] font-bold tracking-widest text-secondary uppercase">
+              The Challenge & Objectives
+            </span>
+          </div>
+
+          <h2 class="font-plus-jakarta-sans font-extrabold text-primary text-[28px] sm:text-[36px] md:text-[42px] leading-tight mb-6">
+            {caseStudy.challenge.headline}
+          </h2>
+
+          <p class="font-plus-jakarta-sans text-[16px] sm:text-[18px] text-on-surface-variant leading-relaxed mb-8">
+            {caseStudy.challenge.description}
+          </p>
+
+          <div class="bg-surface-container-low p-6 sm:p-8 rounded-xl border border-outline-variant">
+            <h3 class="font-plus-jakarta-sans text-[14px] font-extrabold text-primary uppercase tracking-wider mb-4">
+              Core Technical & Business Bottlenecks
+            </h3>
+            <ul class="space-y-4">
+              {caseStudy.challenge.keyPoints.map((point) => (
+                <li class="flex items-start gap-3 text-[14px] sm:text-[15px] text-on-surface-variant font-plus-jakarta-sans">
+                  <span class="material-symbols-outlined text-emerald-600 shrink-0 mt-0.5 text-[20px]" aria-hidden="true">
+                    check_circle
+                  </span>
+                  <span>{point}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </article>
+
+        <!-- Divider -->
+        <hr class="border-outline-variant/60" />
+
+        <!-- 02. Tech Architecture & Stack -->
+        <article id="architecture" class="scroll-reveal scroll-mt-28">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="font-plus-jakarta-sans text-[11px] font-extrabold tracking-widest text-on-primary bg-primary px-2.5 py-1 rounded">
+              02
+            </span>
+            <span class="font-plus-jakarta-sans text-[12px] font-bold tracking-widest text-secondary uppercase">
+              Engineering Architecture
+            </span>
+          </div>
+
+          <h2 class="font-plus-jakarta-sans font-extrabold text-primary text-[28px] sm:text-[36px] md:text-[42px] leading-tight mb-6">
+            {caseStudy.architecture.headline}
+          </h2>
+
+          <p class="font-plus-jakarta-sans text-[16px] sm:text-[18px] text-on-surface-variant leading-relaxed mb-8">
+            {caseStudy.architecture.description}
+          </p>
+
+          <h3 class="font-plus-jakarta-sans text-[15px] font-extrabold text-primary uppercase tracking-wider mb-4">
+            Technology Stack & Rationale
+          </h3>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {caseStudy.architecture.techStack.map((tech) => (
+              <div class="p-5 rounded-xl bg-surface-container-lowest border border-outline-variant hover:border-primary/50 transition-all duration-300">
+                <div class="flex items-center justify-between gap-2 mb-2">
+                  <span class="font-plus-jakarta-sans font-bold text-[16px] text-primary">
+                    {tech.name}
+                  </span>
+                  <span class="text-[10px] font-extrabold tracking-wider uppercase px-2 py-0.5 rounded bg-surface-container-high text-secondary font-plus-jakarta-sans">
+                    {tech.category}
+                  </span>
+                </div>
+                <p class="font-plus-jakarta-sans text-[13px] text-on-surface-variant leading-relaxed">
+                  {tech.role}
+                </p>
+              </div>
+            ))}
+          </div>
+        </article>
+
+        <!-- Divider -->
+        <hr class="border-outline-variant/60" />
+
+        <!-- 03. Solution & Visual Gallery -->
+        <article id="solution" class="scroll-reveal scroll-mt-28">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="font-plus-jakarta-sans text-[11px] font-extrabold tracking-widest text-on-primary bg-primary px-2.5 py-1 rounded">
+              03
+            </span>
+            <span class="font-plus-jakarta-sans text-[12px] font-bold tracking-widest text-secondary uppercase">
+              UX Innovations & Solution
+            </span>
+          </div>
+
+          <h2 class="font-plus-jakarta-sans font-extrabold text-primary text-[28px] sm:text-[36px] md:text-[42px] leading-tight mb-6">
+            {caseStudy.solution.headline}
+          </h2>
+
+          <p class="font-plus-jakarta-sans text-[16px] sm:text-[18px] text-on-surface-variant leading-relaxed mb-8">
+            {caseStudy.solution.description}
+          </p>
+
+          <!-- Features Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+            {caseStudy.solution.features.map((feat) => (
+              <div class="p-6 rounded-xl bg-surface-container-lowest border border-outline-variant shadow-sm flex flex-col justify-between">
+                <div>
+                  {feat.tag && (
+                    <span class="inline-block text-[10px] font-extrabold tracking-widest uppercase text-tertiary bg-tertiary-fixed px-2.5 py-0.5 rounded mb-3 font-plus-jakarta-sans">
+                      {feat.tag}
+                    </span>
+                  )}
+                  <h4 class="font-plus-jakarta-sans font-bold text-[18px] text-primary mb-2">
+                    {feat.title}
+                  </h4>
+                  <p class="font-plus-jakarta-sans text-[14px] text-on-surface-variant leading-relaxed">
+                    {feat.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <!-- Interactive Visual Showcase Gallery -->
+          {caseStudy.solution.gallery && caseStudy.solution.gallery.length > 0 && (
+            <div class="space-y-8">
+              <h3 class="font-plus-jakarta-sans text-[15px] font-extrabold text-primary uppercase tracking-wider mb-4">
+                Visual Artifacts & Interface Captures
+              </h3>
+
+              <div class="grid grid-cols-1 gap-8">
+                {caseStudy.solution.gallery.map((imgItem, idx) => (
+                  <figure class="group relative rounded-xl overflow-hidden bg-surface-container-low border border-outline-variant shadow-md">
+                    <div class="relative overflow-hidden cursor-zoom-in gallery-trigger" data-img-url={imgItem.url} data-caption={imgItem.caption}>
+                      <img
+                        src={imgItem.url}
+                        alt={imgItem.alt}
+                        loading="lazy"
+                        decoding="async"
+                        class="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-102"
+                      />
+                      <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <span class="bg-background/90 text-primary font-bold text-[13px] uppercase px-4 py-2 rounded-full shadow-lg flex items-center gap-2 font-plus-jakarta-sans">
+                          <span class="material-symbols-outlined text-[18px]">zoom_in</span>
+                          Expand Artifact #{idx + 1}
+                        </span>
+                      </div>
+                    </div>
+                    {imgItem.caption && (
+                      <figcaption class="p-4 bg-surface-container-lowest border-t border-outline-variant/60 font-plus-jakarta-sans text-[13px] text-secondary font-medium flex items-center justify-between">
+                        <span>{imgItem.caption}</span>
+                        <span class="text-[11px] uppercase font-bold text-outline">Click to Enlarge</span>
+                      </figcaption>
+                    )}
+                  </figure>
+                ))}
+              </div>
+            </div>
+          )}
+        </article>
+
+        <!-- Divider -->
+        <hr class="border-outline-variant/60" />
+
+        <!-- 04. Business Impact & Testimonial -->
+        <article id="impact" class="scroll-reveal scroll-mt-28">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="font-plus-jakarta-sans text-[11px] font-extrabold tracking-widest text-on-primary bg-primary px-2.5 py-1 rounded">
+              04
+            </span>
+            <span class="font-plus-jakarta-sans text-[12px] font-bold tracking-widest text-secondary uppercase">
+              Business Impact & Testimonials
+            </span>
+          </div>
+
+          <h2 class="font-plus-jakarta-sans font-extrabold text-primary text-[28px] sm:text-[36px] md:text-[42px] leading-tight mb-6">
+            {caseStudy.impact.headline}
+          </h2>
+
+          <p class="font-plus-jakarta-sans text-[16px] sm:text-[18px] text-on-surface-variant leading-relaxed mb-8">
+            {caseStudy.impact.description}
+          </p>
+
+          <!-- Executive Testimonial Card -->
+          {caseStudy.impact.testimonial && (
+            <div class="relative p-8 sm:p-10 rounded-2xl bg-primary text-on-primary border border-outline-variant shadow-xl overflow-hidden">
+              <div class="absolute -right-8 -bottom-8 text-white/5 font-black text-[180px] pointer-events-none select-none">
+                “
+              </div>
+
+              <span class="material-symbols-outlined text-[36px] text-on-primary-container mb-4 block" aria-hidden="true">
+                format_quote
+              </span>
+
+              <blockquote class="font-plus-jakarta-sans text-[18px] sm:text-[22px] md:text-[24px] font-semibold text-on-primary leading-relaxed mb-8 italic">
+                "{caseStudy.impact.testimonial.quote}"
+              </blockquote>
+
+              <div class="flex items-center gap-4 pt-6 border-t border-outline-variant/30">
+                <div class="w-12 h-12 rounded-full bg-surface-container-high text-primary font-black text-[18px] flex items-center justify-center uppercase shrink-0">
+                  {caseStudy.impact.testimonial.author.charAt(0)}
+                </div>
+                <div>
+                  <h4 class="font-plus-jakarta-sans font-bold text-[16px] text-on-primary">
+                    {caseStudy.impact.testimonial.author}
+                  </h4>
+                  <p class="font-plus-jakarta-sans text-[13px] text-on-primary-container">
+                    {caseStudy.impact.testimonial.role} — <span class="font-semibold text-on-primary">{caseStudy.impact.testimonial.company}</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+        </article>
+
+      </main>
+
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox Modal Container -->
+<div id="lightbox-modal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden opacity-0 transition-opacity duration-300 flex items-center justify-center p-4">
+  <button id="lightbox-close" class="absolute top-6 right-6 text-white text-3xl font-bold p-2 hover:text-gray-300 transition-colors" aria-label="Close Lightbox">
+    &times;
+  </button>
+  <div class="max-w-5xl max-h-[90vh] flex flex-col items-center justify-center">
+    <img id="lightbox-img" src="" alt="Enlarged case study image" class="max-w-full max-h-[80vh] object-contain rounded-lg shadow-2xl" />
+    <p id="lightbox-caption" class="text-white text-center font-plus-jakarta-sans text-[14px] mt-4 font-medium max-w-xl"></p>
+  </div>
+</div>
+
+<script>
+  function initCaseStudyInteractions() {
+    // 1. Table of Contents active highlight on scroll
+    const sections = document.querySelectorAll<HTMLElement>('article[id]');
+    const tocLinks = document.querySelectorAll<HTMLAnchorElement>('.toc-link');
+
+    if (sections.length && tocLinks.length) {
+      const observerOptions = {
+        root: null,
+        rootMargin: '-20% 0px -60% 0px',
+        threshold: 0
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = entry.target.getAttribute('id');
+            tocLinks.forEach((link) => {
+              if (link.getAttribute('href') === `#${id}`) {
+                link.classList.add('text-primary', 'border-primary', 'font-extrabold');
+                link.classList.remove('text-secondary', 'border-transparent');
+              } else {
+                link.classList.remove('text-primary', 'border-primary', 'font-extrabold');
+                link.classList.add('text-secondary', 'border-transparent');
+              }
+            });
+          }
+        });
+      }, observerOptions);
+
+      sections.forEach((sec) => observer.observe(sec));
+    }
+
+    // 2. Lightbox Zoom functionality
+    const modal = document.getElementById('lightbox-modal');
+    const modalImg = document.getElementById('lightbox-img') as HTMLImageElement;
+    const modalCaption = document.getElementById('lightbox-caption');
+    const closeBtn = document.getElementById('lightbox-close');
+    const triggers = document.querySelectorAll<HTMLElement>('.gallery-trigger');
+
+    if (modal && modalImg && modalCaption && closeBtn) {
+      triggers.forEach((trigger) => {
+        trigger.addEventListener('click', () => {
+          const url = trigger.getAttribute('data-img-url');
+          const caption = trigger.getAttribute('data-caption') || '';
+          if (url) {
+            modalImg.src = url;
+            modalCaption.textContent = caption;
+            modal.classList.remove('hidden');
+            requestAnimationFrame(() => {
+              modal.classList.remove('opacity-0');
+            });
+          }
+        });
+      });
+
+      const closeModal = () => {
+        modal.classList.add('opacity-0');
+        setTimeout(() => {
+          modal.classList.add('hidden');
+          modalImg.src = '';
+        }, 300);
+      };
+
+      closeBtn.addEventListener('click', closeModal);
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+          closeModal();
+        }
+      });
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', initCaseStudyInteractions);
+</script>

@@ -1,0 +1,75 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import CaseStudyHero from "../../components/CaseStudyHero.astro";
+import CaseStudyMetrics from "../../components/CaseStudyMetrics.astro";
+import CaseStudyContent from "../../components/CaseStudyContent.astro";
+import CaseStudyNav from "../../components/CaseStudyNav.astro";
+import CTASection from "../../components/CTASection.astro";
+import FooterBar from "../../components/FooterBar.astro";
+import { getAllCaseStudies, getCaseStudyBySlug, getAdjacentCaseStudies } from "../../data/caseStudies";
+
+export async function getStaticPaths() {
+  const caseStudies = getAllCaseStudies();
+  return caseStudies.map((cs) => ({
+    params: { slug: cs.slug },
+    props: { caseStudy: cs },
+  }));
+}
+
+const { slug } = Astro.params;
+const { caseStudy: propCaseStudy } = Astro.props;
+
+// Fallback lookup if accessed directly
+const caseStudy = propCaseStudy || getCaseStudyBySlug(slug as string);
+
+if (!caseStudy) {
+  return Astro.redirect("/404/");
+}
+
+const { prev, next } = getAdjacentCaseStudies(caseStudy.slug);
+---
+
+<Layout
+  title={`${caseStudy.title} | Case Study — Mohammed Shammas`}
+  description={caseStudy.summary}
+  ogImage={caseStudy.heroImage}
+>
+  <!-- Reading Progress Bar -->
+  <div class="fixed top-0 left-0 w-full h-1 z-50 bg-surface-container-high pointer-events-none">
+    <div id="reading-progress" class="h-full bg-primary w-0 transition-all duration-150 ease-out reading-progress-bar"></div>
+  </div>
+
+  <article class="min-h-screen">
+    <!-- Hero Header -->
+    <CaseStudyHero caseStudy={caseStudy} />
+
+    <!-- Metrics Bar -->
+    <CaseStudyMetrics metrics={caseStudy.metrics} />
+
+    <!-- Deep-Dive Editorial Content -->
+    <CaseStudyContent caseStudy={caseStudy} />
+
+    <!-- Previous / Next Case Study Navigation -->
+    <CaseStudyNav prev={prev} next={next} />
+  </article>
+
+  <!-- CTA Section & Footer -->
+  <CTASection />
+  <FooterBar />
+</Layout>
+
+<script>
+  function initReadingProgress() {
+    const progress = document.getElementById('reading-progress');
+    if (!progress) return;
+
+    window.addEventListener('scroll', () => {
+      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (totalHeight <= 0) return;
+      const scrollPercent = (window.scrollY / totalHeight) * 100;
+      progress.style.width = `${Math.min(100, Math.max(0, scrollPercent))}%`;
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', initReadingProgress);
+</script>
