@@ -1,17 +1,9 @@
 ---
 /**
  * Projects — Selected Case Studies Section Template.
- * 
- * =========================================================================
- * TEMPLATE GUIDANCE FOR ADDING NEW CASE STUDIES:
- * 
- * To add or edit case studies:
- * 1. Modify the `projects` array below.
- * 2. Each object represents one case study.
- * 3. Set `imageLeft: true` for odd items and `imageLeft: false` for even items
- *    to preserve the alternating visual flow on desktop.
- * =========================================================================
+ * Dynamically rendered from src/data/projects.json via caseStudies.ts.
  */
+import { caseStudies } from "../data/caseStudies";
 
 export interface ProjectTemplateItem {
   id:           string;
@@ -22,51 +14,31 @@ export interface ProjectTemplateItem {
   description:  string;
   imageUrl:     string;
   imageAlt:     string;
-  imageLeft:    boolean; // true = image on left, false = image on right
+  imageLeft:    boolean;
   href?:        string;
 }
 
-const projects: ProjectTemplateItem[] = [
-  /* TEMPLATE CASE STUDY 1 */
-  {
-    id:           "global-asset-management",
-    category:     "Fintech & Strategy",
-    categoryBg:   "bg-tertiary-fixed",
-    categoryText: "text-on-tertiary-fixed",
-    title:        "Global Asset Management Portal",
-    description:  "Redesigning the wealth management experience for high-net-worth individuals across 12 European markets. Focus on security, clarity, and rapid insight delivery.",
-    imageUrl:     "https://lh3.googleusercontent.com/aida-public/AB6AXuDJ1SA4-73E6GdgQQ4HPov5isXl7PvxN4zniQXQqaPJhtD-tCPTq3flpW2U1Dv4xT5buBNKCJWwRYtLDrrFLHD2z_CVy-ILgcUbnA90wq4bZjwE4bNrnsCfcMUX2TFTjimfCZ3gzqENmzzC6FiY4V4eFcv-WGlYDXLKpc3zuf5F3TD_y2Urc5NEx89anijtW5mgvDkNOywdlwRthNTryiSdsAeU14DI64QEfBfYJGZLCyAVCxsyOo9FrOp5D6KzeJMN-cYJ0SmYj8c",
-    imageAlt:     "Mobile banking application dashboard mockup — minimalist charcoal and white UI",
-    imageLeft:    true,
-    href:         "/work/global-asset-management/",
-  },
-  /* TEMPLATE CASE STUDY 2 */
-  {
-    id:           "luxury-retail-ecosystem",
-    category:     "E-Commerce & UX",
-    categoryBg:   "bg-secondary-fixed",
-    categoryText: "text-on-secondary-fixed-variant",
-    title:        "Luxury Retail Ecosystem",
-    description:  "Developing an omni-channel e-commerce experience for a heritage luxury brand. Seamlessly integrating digital and physical boutique interactions.",
-    imageUrl:     "https://lh3.googleusercontent.com/aida-public/AB6AXuBXg9pzJ-TRVgtrJ96zTGgktcDzA_KgAzGNfVd140oPHO3YMeybUawaAqtJTAcP6njWD-zxFq3a6AapVD8Mtv6cB59goFsKnBGMOTSsx6VBRYrS8LVHS4SHOko5llmQr_eKezyi11L1fjfF8KQpQmQWE6wQx_nbyG8TCrtsc_jWBNm6MfdBl0DS8ls8tlvl8Fy86pjc0DKyDE6_LJpbIqA287K2xpficAvfvQSfOhVruyGaK165Cur24AXymdzfYJZ1M4mjkS04sbo",
-    imageAlt:     "Editorial luxury fashion website — bold typography with charcoal and ivory palette",
-    imageLeft:    false,
-    href:         "/work/luxury-retail-ecosystem/",
-  },
-  /* TEMPLATE CASE STUDY 3 */
-  {
-    id:           "saas-analytics",
-    category:     "Enterprise & Architecture",
-    categoryBg:   "bg-primary-fixed",
-    categoryText: "text-on-primary-fixed-variant",
-    title:        "Next-Gen SaaS Analytics",
-    description:  "Modernizing the data visualization layer for a leading enterprise analytics platform. Simplifying complex data sets into actionable executive insights.",
-    imageUrl:     "https://lh3.googleusercontent.com/aida-public/AB6AXuDdOneOMgBaJxd91LW6PbFv2oswMugTcPs4T3DX0r-JQsFTOtr2edIJhFkj_cke_JN_IM-vAO6E7Ykkj1k7RdXfid1nLvxjUvNeMiGXvmSIHSvA4x0F5kR0T6dJFfuMq27fBG5F4w5C0d341T_TCvS6iy00rnGZUCe47aqo6c0BpBXYt98hvjG5yV6erhwH9gpYsNAzUGwZpLMHT-GF9AZFsyzQakVBmK2xDZsG_k1fJAPqnA_oDbYd7ana_No9uFgqZiMRS6l2OZc",
-    imageAlt:     "Corporate SaaS intranet dashboard with data visualisation charts in a glass-walled office",
-    imageLeft:    true,
-    href:         "/work/saas-analytics/",
-  },
+const categoryStyles = [
+  { bg: "bg-tertiary-fixed", text: "text-on-tertiary-fixed" },
+  { bg: "bg-secondary-fixed", text: "text-on-secondary-fixed-variant" },
+  { bg: "bg-primary-fixed", text: "text-on-primary-fixed-variant" },
 ];
+
+const projects: ProjectTemplateItem[] = caseStudies.map((cs, index) => {
+  const style = categoryStyles[index % categoryStyles.length];
+  return {
+    id:           cs.slug,
+    category:     cs.categoryLabel || cs.subtitle,
+    categoryBg:   style.bg,
+    categoryText: style.text,
+    title:        cs.title,
+    description:  cs.summary,
+    imageUrl:     cs.heroImage,
+    imageAlt:     cs.heroImageAlt || cs.title,
+    imageLeft:    index % 2 === 0,
+    href:         `/work/${cs.slug}/`,
+  };
+});
 ---
 
 <section
