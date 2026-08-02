@@ -32,7 +32,18 @@ const { prev, next } = getAdjacentCaseStudies(caseStudy.slug);
 <Layout
   title={`${caseStudy.title} | Case Study — Mohammed Shammas`}
   description={caseStudy.summary}
+  keywords={[
+    caseStudy.title,
+    caseStudy.client,
+    caseStudy.categoryLabel,
+    caseStudy.role,
+    ...caseStudy.architecture.techStack.map((t) => t.name),
+    "Mohammed Shammas Case Study",
+  ]}
   ogImage={caseStudy.heroImage}
+  ogImageAlt={caseStudy.heroImageAlt || `${caseStudy.title} Case Study`}
+  pageType="article"
+  tags={[caseStudy.categoryLabel, caseStudy.client, ...caseStudy.architecture.techStack.map((t) => t.name)]}
 >
   <!-- Reading Progress Bar -->
   <div class="fixed top-0 left-0 w-full h-1 z-50 bg-surface-container-high pointer-events-none">

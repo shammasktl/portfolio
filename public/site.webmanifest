@@ -1,0 +1,18 @@
+{
+  "name": "Mohammed Shammas | Full-Stack Developer & Digital Problem Solver",
+  "short_name": "Shammas",
+  "description": "Crafting digital experiences with precision and purpose. Mohammed Shammas bridges the gap between high-level strategy and pixel-perfect execution for global brands.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0b0f17",
+  "theme_color": "#0b0f17",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
