@@ -39,6 +39,17 @@ const bentoProjects: BentoProject[] = caseStudies.map((cs, index) => {
     date:        cs.timeline,
   };
 });
+
+const allCategoriesConfig = [
+  { id: 'ux', label: 'UX & Product' },
+  { id: 'dev', label: 'Engineering & Systems' },
+  { id: 'branding', label: 'Brand Strategy' },
+] as const;
+
+// Only display category filter tabs that have at least 1 project in the dataset
+const usedCategories = allCategoriesConfig.filter((cat) =>
+  bentoProjects.some((p) => p.category === cat.id)
+);
 ---
 
 <section 
@@ -66,7 +77,7 @@ const bentoProjects: BentoProject[] = caseStudies.map((cs, index) => {
       </p>
     </div>
 
-    <!-- Filter Buttons -->
+    <!-- Filter Buttons (Only shown for used categories) -->
     <div class="flex flex-wrap items-center gap-2 sm:gap-3 mb-10 sm:mb-14 scroll-reveal" role="tablist" aria-label="Filter projects by category">
       <button
         type="button"
@@ -77,33 +88,20 @@ const bentoProjects: BentoProject[] = caseStudies.map((cs, index) => {
       >
         All Works ({bentoProjects.length})
       </button>
-      <button
-        type="button"
-        class="filter-btn bg-surface-container-high text-on-surface-variant hover:text-primary font-plus-jakarta-sans text-[13px] font-bold px-4 sm:px-5 py-2.5 rounded-full transition-all duration-200"
-        data-filter="ux"
-        role="tab"
-        aria-selected="false"
-      >
-        UX & Product
-      </button>
-      <button
-        type="button"
-        class="filter-btn bg-surface-container-high text-on-surface-variant hover:text-primary font-plus-jakarta-sans text-[13px] font-bold px-4 sm:px-5 py-2.5 rounded-full transition-all duration-200"
-        data-filter="dev"
-        role="tab"
-        aria-selected="false"
-      >
-        Engineering & Systems
-      </button>
-      <button
-        type="button"
-        class="filter-btn bg-surface-container-high text-on-surface-variant hover:text-primary font-plus-jakarta-sans text-[13px] font-bold px-4 sm:px-5 py-2.5 rounded-full transition-all duration-200"
-        data-filter="branding"
-        role="tab"
-        aria-selected="false"
-      >
-        Brand Strategy
-      </button>
+      {usedCategories.map((cat) => {
+        const count = bentoProjects.filter((p) => p.category === cat.id).length;
+        return (
+          <button
+            type="button"
+            class="filter-btn bg-surface-container-high text-on-surface-variant hover:text-primary font-plus-jakarta-sans text-[13px] font-bold px-4 sm:px-5 py-2.5 rounded-full transition-all duration-200"
+            data-filter={cat.id}
+            role="tab"
+            aria-selected="false"
+          >
+            {cat.label} ({count})
+          </button>
+        );
+      })}
     </div>
 
     <!-- Bento Grid Container -->
