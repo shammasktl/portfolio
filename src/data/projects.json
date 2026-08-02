@@ -9,7 +9,7 @@
     "timeline": "2024 - Present",
     "role": "Lead Digital Architect & Product Designer",
     "liveUrl": "https://thelicham.com",
-    "heroImage": "https://lh3.googleusercontent.com/aida-public/AB6AXuBXg9pzJ-TRVgtrJ96zTGgktcDzA_KgAzGNfVd140oPHO3YMeybUawaAqtJTAcP6njWD-zxFq3a6AapVD8Mtv6cB59goFsKnBGMOTSsx6VBRYrS8LVHS4SHOko5llmQr_eKezyi11L1fjfF8KQpQmQWE6wQx_nbyG8TCrtsc_jWBNm6MfdBl0DS8ls8tlvl8Fy86pjc0DKyDE6_LJpbIqA287K2xpficAvfvQSfOhVruyGaK165Cur24AXymdzfYJZ1M4mjkS04sbo",
+    "heroImage": "/projects/thelicham.png",
     "heroImageAlt": "Thelicham Digital Webzine editorial reading experience and online publication layout",
     "summary": "Architected and developed the digital publication platform for Thelicham Webzine (thelicham.com), delivering an elegant typography-focused reading experience, multi-issue archives, and sub-second global content delivery.",
     "metrics": [
@@ -50,11 +50,11 @@
     },
     "architecture": {
       "headline": "High-Performance Content Architecture & Edge Delivery",
-      "description": "Built using Astro for static page pre-rendering, paired with a headless content structure and edge CDN distribution for instant reading.",
+      "description": "Built using Next for static page pre-rendering, paired with a headless content structure and edge CDN distribution for instant reading.",
       "techStack": [
         {
-          "name": "Astro & TypeScript",
-          "role": "Zero-JS baseline content delivery & static generation",
+          "name": "Next & TypeScript",
+          "role": " Static generation",
           "category": "frontend"
         },
         {
@@ -96,7 +96,7 @@
       ],
       "gallery": [
         {
-          "url": "https://lh3.googleusercontent.com/aida-public/AB6AXuBXg9pzJ-TRVgtrJ96zTGgktcDzA_KgAzGNfVd140oPHO3YMeybUawaAqtJTAcP6njWD-zxFq3a6AapVD8Mtv6cB59goFsKnBGMOTSsx6VBRYrS8LVHS4SHOko5llmQr_eKezyi11L1fjfF8KQpQmQWE6wQx_nbyG8TCrtsc_jWBNm6MfdBl0DS8ls8tlvl8Fy86pjc0DKyDE6_LJpbIqA287K2xpficAvfvQSfOhVruyGaK165Cur24AXymdzfYJZ1M4mjkS04sbo",
+          "url": "/projects/thelicham.png",
           "caption": "Thelicham Webzine — Editorial reading experience on mobile and desktop",
           "alt": "Thelicham webzine publication interface"
         }
@@ -107,8 +107,8 @@
       "description": "The new digital webzine platform significantly expanded readership, offering an unparalleled reading experience that keeps readers engaged issue after issue.",
       "testimonial": {
         "quote": "Thelicham's digital platform elevates our editorial content to world-class standards. The reading experience is pure joy.",
-        "author": "Editorial Board",
-        "role": "Chief Editor",
+        "author": "Ashraf Hudawi Vadakkengara",
+        "role": "General Manager",
         "company": "Thelicham Webzine"
       }
     }
